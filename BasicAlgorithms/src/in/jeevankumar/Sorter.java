@@ -42,6 +42,9 @@ public class Sorter {
                 case "BubbleSort":
                     sorted = this.bubbleSort(unsorted);
                     break;
+                case "MergeSort":
+                    sorted = this.mergeSort(unsorted);
+                    break;
                 default:
                     System.out.println("Sort algorithm unrecognized: " + args[0]);
             }
@@ -59,6 +62,62 @@ public class Sorter {
                     unsorted[j-1] = unsorted[j];
                     unsorted[j] = temp;
                 }
+            }
+        }
+        return unsorted;
+    }
+    
+    /**
+     * This is the ever popular merge sort. The algorithm splits the 
+     * unsorted array in the middle and sorts each one in turn. The left and 
+     * right halves are merged in ascending order to finally sort the array. 
+     * Even the worst case the merge sort has O(n * log n).
+     * 
+     * @param unsorted
+     * @return 
+     */
+    private int[] mergeSort(int[] unsorted) {
+        int[] sorted = null;
+        if (unsorted.length == 1) {
+            sorted = unsorted;
+        } else {
+            int mid = unsorted.length / 2;
+            
+            int[] left = Arrays.copyOfRange(unsorted, 0, mid);
+            int[] right = Arrays.copyOfRange(unsorted, mid, unsorted.length);
+            
+            mergeSort(left);
+            mergeSort(right);
+            
+            sorted = merge(unsorted, left, right);
+        }
+        
+        return sorted;
+    }
+    
+    /**
+     * This is a utility function for merge sort. It merges left and the right 
+     * array into the 'unsorted' array, it merges the left and right arrays in
+     * ascending manner.
+     * 
+     * @param unsorted
+     * @param left
+     * @param right
+     * @return 
+     */
+    private int[] merge(int[] unsorted, int[] left, int[] right) {
+        
+        for (int i = 0, j=0, k=0; k < unsorted.length ;k++) {
+            if (i < left.length && j < right.length) {
+                if (left[i] < right[j]) {
+                    unsorted[k] = left[i++];
+                } else {
+                    unsorted[k] = right[j++];
+                }
+            } else if (i < left.length) {
+                unsorted[k] = left[i++];
+            } else if (j < right.length) {
+                unsorted[k] = right[j++];
             }
         }
         return unsorted;
