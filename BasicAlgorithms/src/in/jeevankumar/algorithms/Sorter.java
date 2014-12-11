@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.jeevankumar;
+package in.jeevankumar.algorithms;
 
 import java.util.Arrays;
 
@@ -76,7 +76,7 @@ public class Sorter {
      * @param unsorted
      * @return 
      */
-    private int[] mergeSort(int[] unsorted) {
+    public int[] mergeSort(int[] unsorted) {
         int[] sorted = null;
         if (unsorted.length == 1) {
             sorted = unsorted;
