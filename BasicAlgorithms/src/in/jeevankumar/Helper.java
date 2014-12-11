@@ -1,0 +1,38 @@
+/*
+ * Copyright 2014 Jeevan Kumar <mail@jeevankumar.in>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package in.jeevankumar;
+
+/**
+ *
+ * @author Jeevan Kumar <mail@jeevankumar.in>
+ */
+public class Helper {
+    public static double round (double input) {
+        input = input * 1000.0;
+        int tempInt = (int) input;
+        double output = ((double)tempInt)/1000;
+        return output;
+    }
+    public static int[] stringToIntArray(String input ) {
+        //String input = args[0];
+        String inputs[] = input.split(",");
+        int[] unsorted = new int[inputs.length];
+        for (int i = 0; i < inputs.length; i++) {
+            unsorted[i] = Integer.parseInt(inputs[i].trim());
+        }
+        return unsorted;
+    }
+}
