@@ -20,12 +20,23 @@ package in.jeevankumar;
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class Helper {
+    /**
+     * A quick way to round numbers.
+     * @param input
+     * @return 
+     */
     public static double round (double input) {
         input = input * 1000.0;
         int tempInt = (int) input;
         double output = ((double)tempInt)/1000;
         return output;
     }
+    /**
+     * This function takes a comma separated integers in a String 
+     * and into a array of integers. 
+     * @param input
+     * @return 
+     */
     public static int[] stringToIntArray(String input ) {
         //String input = args[0];
         String inputs[] = input.split(",");
