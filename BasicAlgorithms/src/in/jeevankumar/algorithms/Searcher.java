@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.util.Queue;
 import java.util.Arrays;
 
 /**
@@ -36,15 +37,22 @@ public class Searcher {
     public void run(String[] args) {
         int[] tree = Helper.stringToIntArray(args[1]);
         int resultIndex = -1;
+        System.out.println("Searching " + args[2] + " in " + Arrays.toString(tree));
         switch(args[0]) {
             case "BinarySearch":
                 resultIndex = this.binarySearchRunner(tree, Integer.parseInt(args[2]));
                 break;
+            case "BreadthFirstSearch":
+                resultIndex = this.breadthFirstSearch(tree, Integer.parseInt(args[2]));
+                break;
             case "DepthFirstSearch":
+                resultIndex = this.depthFirst(tree, Integer.parseInt(args[2]),0);
                 break;
             default:
                 System.out.println("Error: Unrecognized Algorithm " + args[0]);
         }
+        System.out.println("Result Index: " + resultIndex);
+
     }
     
     private int binarySearchRunner(int[] intArray, int searchElement) {
@@ -75,18 +83,69 @@ public class Searcher {
     
     /**
      * This method searches a binary tree breadth first. It assumes an array 
-     * implementation of tree.
+     * implementation of tree. <Breadth first in a tree representation is just
+     * iterating over from 0 to 1>
      * @param tree
      * @param searchElement
      * @return 
      */
     private int breadthFirstSearch(int[] tree, int searchElement) {
-        
+        Queue<Integer> myQueue = new Queue<Integer>();
+        int resultIndex = -1;
         for (int i = 0; i < tree.length;) {
+            System.out.println(i);
+            if(tree[i] == searchElement) {
+                resultIndex = i;
+                break;
+            } else {
+                myQueue.add(i * 2 + 1);
+                myQueue.add(i * 2 + 2);
+            }
             
+            i = myQueue.getNext().intValue();
         }
         
-        return 0;
+        return resultIndex;
+    }
+    
+    /**
+     * This method searches a binary tree depth first. It assumes an array 
+     * implementation of tree. 
+     * @param tree
+     * @param searchElement
+     * @return 
+     */
+    private int depthFirstSearch(int[] tree, int searchElement) {
+        Queue<Integer> myQueue = new Queue<Integer>();
+        int resultIndex = -1;
+        for (int i = 0; i < tree.length;) {
+            System.out.println(i);
+            if(tree[i] == searchElement) {
+                resultIndex = i;
+                break;
+            } else {
+                myQueue.add(i * 2 + 1);
+                myQueue.add(i * 2 + 2);
+            }
+            
+            i = myQueue.getNext().intValue();
+        }
+        
+        return resultIndex;
+    }
+    
+    private int depthFirst(int[] tree, int searchElement, int index) {
+        int retVal = -1;
+        System.out.println(index);
+        if (tree[index] == searchElement) {
+            retVal =  index;
+        } else {
+            retVal = depthFirst(tree, searchElement, index * 2 + 1);
+            if (retVal == -1)
+                retVal = depthFirst(tree, searchElement, index * 2 + 2);
+        }
+        
+        return retVal;
     }
     
 }
