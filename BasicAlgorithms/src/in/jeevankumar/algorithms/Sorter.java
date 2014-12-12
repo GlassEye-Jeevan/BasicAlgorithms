@@ -45,6 +45,9 @@ public class Sorter {
                 case "MergeSort":
                     sorted = this.mergeSort(unsorted);
                     break;
+                case "QuickSort":
+                    sorted = this.quickSort(unsorted, 0, unsorted.length);
+                    break;    
                 default:
                     System.out.println("Sort algorithm unrecognized: " + args[0]);
             }
@@ -54,7 +57,7 @@ public class Sorter {
         
     }
     
-    private int[] bubbleSort(int[] unsorted) {
+    public int[] bubbleSort(int[] unsorted) {
         for (int i = 0 ; i < unsorted.length; i++) {
             for (int j = 1; j < unsorted.length - i; j++) {
                 if (unsorted[j-1] > unsorted[j]) {
@@ -121,5 +124,40 @@ public class Sorter {
             }
         }
         return unsorted;
+    }
+    public int[] quickSort(int[] unsorted, int left, int right) {
+        
+        int index = partition (unsorted, left, right);
+        
+        //System.out.println(Arrays.toString(unsorted) + " " + left + " " + right + " " + index);
+        if (left < index - 1 )
+            quickSort(unsorted, left, index - 1);
+        if (index < right) {
+            quickSort(unsorted,index , right);
+        }
+        return unsorted;
+    }
+    
+    private int partition(int[] unsorted, int left, int right) {
+        int i = left; 
+        int j = right;
+        int temp;
+        int pivot = unsorted[(left + right) / 2];
+        //System.out.println(pivot);
+        while (i <= j) {
+            while (unsorted[i] < pivot )
+                i++;
+            while (unsorted[j] > pivot)
+                j--;
+            if  (i <= j ) {
+                //System.out.println("Swapping "+ unsorted[i] + " and " + unsorted[j]);
+                temp = unsorted[i];
+                unsorted[i] = unsorted [j];
+                unsorted[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        return i;
     }
 }

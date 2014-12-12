@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
+import java.util.Random;
 import junit.framework.TestCase;
 
 /**
@@ -34,11 +35,59 @@ public class SearcherTest extends TestCase {
         super.tearDown();
     }
     
-    public void testSearcher() {
-        assertEquals("1", "1");
+    public void testMergeSort() {
+        Random randome = new Random();
+        int limit = randome.nextInt(100);
+        int[] input = new int[limit];
+        
+        for (int i = 0; i < limit; i++) {
+            input[i] = randome.nextInt();
+        }
+        Sorter sorter = new Sorter();
+        
+        int[] output = sorter.mergeSort(input);
+        
+        for (int i = 1; i < limit; i++) {
+            assertTrue(output[i] > output[i-1]);
+        }
     }
     
-    public void testSearcherAgain() {
-        assertEquals("1", "2");
+    public void testBubbleSort() {
+        Random randome = new Random();
+        int limit = randome.nextInt(100);
+        int[] input = new int[limit];
+        
+        for (int i = 0; i < limit; i++) {
+            input[i] = randome.nextInt();
+        }
+        Sorter sorter = new Sorter();
+        
+        int[] output = sorter.bubbleSort(input);
+        
+        for (int i = 1; i < limit; i++) {
+            assertTrue(output[i] > output[i-1]);
+        }
+    }
+    
+    public void testQuickSort() {
+        Random randome = new Random();
+        int limit = randome.nextInt(100);
+        int[] input = new int[limit];
+        
+        for (int i = 0; i < limit; i++) {
+            input[i] = randome.nextInt();
+        }
+        Sorter sorter = new Sorter();
+        
+        int[] output = sorter.quickSort(input,0,input.length-1);
+        
+        assertArrayIsSorted(output);
+        
+    }
+    
+    private void assertArrayIsSorted(int[] apparentlySorted) {
+        for (int i = 1; i < apparentlySorted.length; i++) {
+            assertTrue(apparentlySorted[i] > apparentlySorted[i-1]);
+        }
     }
 }
