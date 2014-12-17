@@ -136,13 +136,16 @@ public class Searcher {
     
     private int depthFirst(int[] tree, int searchElement, int index) {
         int retVal = -1;
-        System.out.println(index);
-        if (tree[index] == searchElement) {
-            retVal =  index;
-        } else {
-            retVal = depthFirst(tree, searchElement, index * 2 + 1);
-            if (retVal == -1)
-                retVal = depthFirst(tree, searchElement, index * 2 + 2);
+        if (index < tree.length) {
+            System.out.println(tree[index]);
+        
+            if (tree[index] == searchElement) {
+                retVal =  index;
+            } else {
+                retVal = depthFirst(tree, searchElement, index * 2 + 1);
+                if (retVal == -1)
+                    retVal = depthFirst(tree, searchElement, index * 2 + 2);
+            }
         }
         
         return retVal;

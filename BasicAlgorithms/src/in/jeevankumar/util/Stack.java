@@ -15,34 +15,35 @@
  */
 package in.jeevankumar.util;
 
-import java.util.List;
-
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Queue<T> {
-    private LinkedList<T> myList;
-    public Queue() {
-        myList = new LinkedList();
+public class Stack<T> {
+    private DoublyLinkedList<T> first;
+    private DoublyLinkedList<T> last;
+    
+    
+    public Stack() {
+        //myList = new LinkedList<T>();
+    }
+    public T pop() {
+        DoublyLinkedList<T> temp = last;
+        last = last.getPrev();
+        last.setNext(null);
+        temp.setPrev(null);
+        return temp.getInformation();
     }
     
-    public void add(T element) {
-        LinkedList lastElement = this.getLastElement();
-        lastElement.setNext(new LinkedList(element));
-    }
-    
-    public T getNext() {
-        T retVal = myList.getInformation();
-        myList = myList.getNext();
-        return retVal;
-    }
-    
-    private LinkedList getLastElement() {
-        LinkedList start = myList;
-        while (start.getNext()!=null) {
-            start = start.getNext();
+    public void push(T element) {
+        if (first == null) {
+            first = new DoublyLinkedList<T>(element);
+            last = first;
+        } else {
+            DoublyLinkedList newNode = new DoublyLinkedList<T> (element);
+            last.setNext(newNode);
+            newNode.setPrev(last);
+            last = newNode;
         }
-        return start;
     }
 }

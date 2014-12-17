@@ -15,34 +15,39 @@
  */
 package in.jeevankumar.util;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Queue<T> {
-    private LinkedList<T> myList;
-    public Queue() {
-        myList = new LinkedList();
+public class Tree<T> {
+    private T info;
+    private ArrayList<Tree> children;
+
+    
+    public Tree(T information) {
+        this.info = information;
+        children = new ArrayList<Tree>();
+    }
+
+    /**
+     * @return the info
+     */
+    public T getInfo() {
+        return info;
     }
     
-    public void add(T element) {
-        LinkedList lastElement = this.getLastElement();
-        lastElement.setNext(new LinkedList(element));
+    public void addChild(Tree child) {
+        this.children.add(child);
     }
     
-    public T getNext() {
-        T retVal = myList.getInformation();
-        myList = myList.getNext();
-        return retVal;
+    public int children() {
+        return children.size();
     }
     
-    private LinkedList getLastElement() {
-        LinkedList start = myList;
-        while (start.getNext()!=null) {
-            start = start.getNext();
-        }
-        return start;
+    public Tree getChild(int index) {
+        return this.children.get(index);
     }
+    
 }

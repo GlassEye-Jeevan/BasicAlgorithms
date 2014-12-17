@@ -15,11 +15,22 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.util.Constants;
+import in.jeevankumar.util.LinkedList;
+import in.jeevankumar.util.Queue;
+import in.jeevankumar.util.Tree;
+import java.util.Random;
+
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class Helper {
+    
+    public static void main(String[] args) {
+        Helper.setupTree(9);
+    }
+    
     /**
      * A quick way to round numbers.
      * @param input
@@ -45,5 +56,90 @@ public class Helper {
             unsorted[i] = Integer.parseInt(inputs[i].trim());
         }
         return unsorted;
+    }
+    
+    public static LinkedList generateRandomList(int size) {
+        LinkedList retVal = null;
+        LinkedList head = null;
+        LinkedList current = null;
+        LinkedList previous = null;
+        
+        Random rand = new Random();
+        for (int i = 0; i < size; i++) {
+            int randomInt = rand.nextInt(Constants.BOUND);
+            current = new LinkedList(randomInt);
+            
+            if (previous != null) {
+                previous.setNext(current);
+            }
+            
+            if(i == 0) {
+                head = current;
+            }
+            previous = current;
+        }
+        retVal = head;
+        return retVal;
+    }
+    
+    public static LinkedList generateSequentialLinkedList(int size) {
+        LinkedList<Integer> retVal = null;
+        LinkedList<Integer> head = null;
+        LinkedList<Integer> current = null;
+        LinkedList<Integer> previous = null;
+        
+        for (int i = 0; i < size; i++) {
+            current = new LinkedList(new Integer(i));
+            
+            if (previous != null) {
+                previous.setNext(current);
+            }
+            
+            if(i == 0) {
+                head = current;
+            }
+            previous = current;
+        }
+        retVal = head;
+        return retVal;
+    }
+    
+    public static Tree setupTree(int size) {
+        Queue<Tree> setupQ1 = new Queue<Tree>();
+        Queue<Tree> setupQ2 = new Queue<Tree>();
+        Tree<Integer>  head = null;
+        Tree<Integer>  temp, tempParent, leftChild, rightChild;
+        for (int i = 1; i <= size; i += 2) {
+            temp = new Tree<Integer>(i);
+            if ( i == 1 ) {
+                setupQ1.add(temp);
+                head = temp;
+             
+            
+                leftChild = new Tree<Integer>(i+1);
+                rightChild = new Tree<Integer>(i+2);
+
+                tempParent = setupQ1.getNext();
+                tempParent.addChild(leftChild);
+                tempParent.addChild(rightChild);
+                setupQ1.add(leftChild);
+                setupQ1.add(rightChild);
+                i++;
+                
+            } else {
+                leftChild = new Tree<Integer>(i);
+                rightChild = new Tree<Integer>(i+1);
+
+                tempParent = setupQ1.getNext();
+                tempParent.addChild(leftChild);
+                tempParent.addChild(rightChild);
+                setupQ1.add(leftChild);
+                setupQ1.add(rightChild);
+                System.out.println("Parent " + tempParent.getInfo() + " Left " + leftChild.getInfo() + " Right " + rightChild.getInfo());
+            }
+            
+        }
+        
+        return head;
     }
 }

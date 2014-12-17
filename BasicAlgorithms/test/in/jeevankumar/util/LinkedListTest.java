@@ -15,34 +15,36 @@
  */
 package in.jeevankumar.util;
 
-import java.util.List;
+import java.util.Random;
+import junit.framework.Assert;
+import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Queue<T> {
-    private LinkedList<T> myList;
-    public Queue() {
-        myList = new LinkedList();
+public class LinkedListTest extends TestCase {
+    
+    public LinkedListTest(String testName) {
+        super(testName);
     }
     
-    public void add(T element) {
-        LinkedList lastElement = this.getLastElement();
-        lastElement.setNext(new LinkedList(element));
+    protected void setUp() throws Exception{
+        super.setUp();
     }
     
-    public T getNext() {
-        T retVal = myList.getInformation();
-        myList = myList.getNext();
-        return retVal;
+    protected void tearDown() throws Exception {
+        super.tearDown();
     }
     
-    private LinkedList getLastElement() {
-        LinkedList start = myList;
-        while (start.getNext()!=null) {
-            start = start.getNext();
-        }
-        return start;
+    @Test
+    public void testLinkedList() {
+        Random rand = new Random();
+        int random = rand.nextInt();
+        LinkedList<Integer> temp = new LinkedList<Integer>(random);
+        assertEquals(temp.getInformation().intValue(), random);
+        assertNull(temp.getNext());
     }
+    
 }

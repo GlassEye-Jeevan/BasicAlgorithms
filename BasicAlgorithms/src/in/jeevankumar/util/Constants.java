@@ -15,34 +15,10 @@
  */
 package in.jeevankumar.util;
 
-import java.util.List;
-
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Queue<T> {
-    private LinkedList<T> myList;
-    public Queue() {
-        myList = new LinkedList();
-    }
-    
-    public void add(T element) {
-        LinkedList lastElement = this.getLastElement();
-        lastElement.setNext(new LinkedList(element));
-    }
-    
-    public T getNext() {
-        T retVal = myList.getInformation();
-        myList = myList.getNext();
-        return retVal;
-    }
-    
-    private LinkedList getLastElement() {
-        LinkedList start = myList;
-        while (start.getNext()!=null) {
-            start = start.getNext();
-        }
-        return start;
-    }
+public interface Constants {
+    public final int BOUND = 100;
 }
