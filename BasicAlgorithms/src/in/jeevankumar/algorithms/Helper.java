@@ -28,7 +28,7 @@ import java.util.Random;
 public class Helper {
     
     public static void main(String[] args) {
-        Helper.setupFullBinary(6);
+        Helper.setupFullBinary(11);
     }
     
     /**
@@ -135,7 +135,6 @@ public class Helper {
                     setupQ1.add(rightChild);
                     output.append(RIGHT).append(rightChild.getInfo())
                             .append(Constants.NEWLINE);
-                    
                 }
                 i++;
                 
@@ -155,11 +154,7 @@ public class Helper {
                     setupQ1.add(rightChild);
                     output.append(RIGHT).append(rightChild.getInfo())
                             .append(Constants.NEWLINE);
-                    
                 }
-                
-
-                
             }
         }
         System.out.print(output.toString());

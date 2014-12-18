@@ -16,6 +16,7 @@
 package in.jeevankumar.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,7 +24,7 @@ import java.util.ArrayList;
  */
 public class Tree<T> {
     private T info;
-    private ArrayList<Tree> children;
+    private List<Tree> children;
 
     
     public Tree(T information) {
@@ -48,6 +49,12 @@ public class Tree<T> {
     
     public Tree getChild(int index) {
         return this.children.get(index);
+    }
+    
+    public List<Tree> getChildren() {
+        List<Tree> retVal = new ArrayList<Tree>();
+        retVal.addAll(children);
+        return retVal;
     }
     
 }
