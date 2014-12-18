@@ -28,11 +28,13 @@ import java.util.Random;
 public class Helper {
     
     public static void main(String[] args) {
-        Helper.setupFullBinary(11);
+        
+        Helper.setUpRandomBinaryTree(16, Constants.BOUND);
     }
     
     /**
      * A quick way to round numbers.
+     * 
      * @param input
      * @return 
      */
@@ -103,63 +105,46 @@ public class Helper {
         retVal = head;
         return retVal;
     }
-    
-    public static Tree setupFullBinary(int size) {
-        Queue<Tree> setupQ1 = new Queue<Tree>();
-        Queue<Tree> setupQ2 = new Queue<Tree>();
-        Tree<Integer>  head = null;
-        Tree<Integer>  temp, tempParent, leftChild, rightChild;
+
+    /**
+     * This function creates a binary tree of a given size. The nodes are 
+     * numbered with random integers with a given bound.
+     * @param size
+     * @return 
+     */    
+    public static Tree<Integer> setUpRandomBinaryTree(int size, int bound) {
+        Random rand = new Random();
+        Queue<Tree> parentQueue = new Queue<Tree>();
+        Tree parentWithOneChild = null; 
+        Tree head = null;
+        Tree current;
+        String ROOT_STRING = "Root: ";
+        String PARENT_STRING = "Parent: ";
+        String LEFT_STRING = " Left: ";
+        String RIGHT_STRING = " Right: ";
         StringBuffer output = new StringBuffer();
-            String LEFT = " Left: ";
-            String RIGHT = " Right: ";
-            
-        for (int i = 1; i <= size; i += 2) {
-            temp = new Tree<Integer>(i);
-            
-            if ( i == 1 ) {
-                setupQ1.add(temp);
-                head = temp;
-                tempParent = setupQ1.getNext();
-                output.append("Root: " + tempParent.getInfo());
-                if (i+1 <= size) {
-                    leftChild = new Tree<Integer>(i+1);
-                    tempParent.addChild(leftChild);
-                    setupQ1.add(leftChild);
-                    output.append(LEFT).append(leftChild.getInfo());
-                }
-                if (i+2 <= size) {
-                
-                    rightChild = new Tree<Integer>(i+2);
-                
-                    tempParent.addChild(rightChild);
-                    setupQ1.add(rightChild);
-                    output.append(RIGHT).append(rightChild.getInfo())
-                            .append(Constants.NEWLINE);
-                }
-                i++;
-                
+        for (int i = 0; i < size; i++) {
+            current = new Tree<Integer>(rand.nextInt(bound));
+            //current = new Tree<Integer>(i+1);
+            parentQueue.add(current);
+            if (head == null) {
+                head = current;
+                output.append(ROOT_STRING).append(head.getInfo())
+                        .append(Constants.NEWLINE);
+            } else if(parentWithOneChild != null) {
+                parentWithOneChild.addChild(current);
+                output.append(RIGHT_STRING).append(current.getInfo())
+                        .append(Constants.NEWLINE);
+                parentWithOneChild = null;
             } else {
-                leftChild = new Tree<Integer>(i);
-               
-                tempParent = setupQ1.getNext();
-                tempParent.addChild(leftChild);
-                setupQ1.add(leftChild);
-                
-                output.append("Parent: ").append(tempParent.getInfo());
-                output.append(LEFT).append(leftChild.getInfo());
-                
-                if (i+1 <= size) {
-                    rightChild = new Tree<Integer>(i+1);
-                    tempParent.addChild(rightChild);
-                    setupQ1.add(rightChild);
-                    output.append(RIGHT).append(rightChild.getInfo())
-                            .append(Constants.NEWLINE);
-                }
+                Tree newParent = parentQueue.getNext();
+                newParent.addChild(current);
+                parentWithOneChild = newParent;
+                output.append(PARENT_STRING).append(newParent.getInfo())
+                        .append(LEFT_STRING).append(current.getInfo());
             }
         }
-        System.out.print(output.toString());
-        System.out.println("");
-        
+        System.out.println(output.toString());
         return head;
     }
 }

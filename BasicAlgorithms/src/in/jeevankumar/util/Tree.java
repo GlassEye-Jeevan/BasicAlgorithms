@@ -48,7 +48,14 @@ public class Tree<T> {
     }
     
     public Tree getChild(int index) {
-        return this.children.get(index);
+        Tree<T> retVal = null;
+        try {
+            retVal = this.children.get(index);
+        } catch (IndexOutOfBoundsException ex) {
+            //do nothing
+            retVal = null;
+        }
+        return retVal;
     }
     
     public List<Tree> getChildren() {

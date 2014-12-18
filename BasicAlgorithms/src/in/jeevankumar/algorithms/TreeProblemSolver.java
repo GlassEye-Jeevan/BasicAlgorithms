@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.util.Constants;
 import in.jeevankumar.util.Tree;
 
 /**
@@ -28,12 +29,15 @@ public class TreeProblemSolver {
     }
     
     public void run() {
-        Tree<Integer> treeRoot = Helper.setupFullBinary(15);
+        //Tree<Integer> treeRoot = Helper.setupFullBinary((int)(Math.pow(2.0, 3.0) - 1.0 ));
+        Tree<Integer> treeRoot = Helper.setUpRandomBinaryTree((int)(Math.pow(2.0, 3.0) - 1.0 ), Constants.BOUND);
         preOrderTraversal(treeRoot);
         System.out.println();
         postOrderTraversal(treeRoot);
         System.out.println();
         inOrderTraversal(treeRoot);
+        System.out.println();
+        
     }
     
     private void preOrderTraversal(Tree<Integer> root) {
@@ -51,21 +55,12 @@ public class TreeProblemSolver {
     }
     
     private void inOrderTraversal(Tree<Integer> root) {
-        
-        if(root.children() > 0) {
-            System.out.print("( ");
+        if (root != null) {
+            //System.out.print("( ");
             inOrderTraversal(root.getChild(0));
             System.out.print(root.getInfo() + " ");
-            if(root.children()==2) 
-                inOrderTraversal(root.getChild(1));
-            System.out.print(") ");
-        } else {
-            System.out.print(root.getInfo() + " ");
+            inOrderTraversal(root.getChild(1));
+            //System.out.print(") ");
         }
-        
-        
-        //System.out.println(")");
     }
-    
-    
 }
