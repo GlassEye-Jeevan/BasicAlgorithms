@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.util;
 
+import java.util.Random;
 import junit.framework.TestCase;
 
 /**
@@ -22,6 +23,7 @@ import junit.framework.TestCase;
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class QueueTest extends TestCase {
+    
     public QueueTest(String testName) {
         super(testName);
     }
@@ -32,5 +34,38 @@ public class QueueTest extends TestCase {
     
     public void tearDown() throws Exception {
         super.tearDown();
+    }
+    
+    public void testAdd() {
+        Random rand = new Random();
+        Queue<Integer> newQ = new Queue<Integer>();
+        int testInt = rand.nextInt();
+        newQ.add(testInt);
+        
+        Integer output = newQ.getNext();
+        assertEquals(output.intValue(), testInt);
+        
+        int limit = rand.nextInt(Constants.BOUND);
+        int[] array = new int[limit];
+        for (int i = 0; i < limit; i++) {
+            array[i] = rand.nextInt();
+            newQ.add(array[i]);
+        }
+        
+        for (int i = 0; i < limit; i++) {
+            assertEquals(array[i], newQ.getNext().intValue());
+        }
+        assertNull(newQ.getNext());
+    }
+    
+    public void testGetNext() {
+        Random rand = new Random();
+        Queue<Integer> newQ = new Queue<Integer>();
+        assertNull(newQ.getNext());
+        int testInt = rand.nextInt();
+        newQ.add(testInt);
+
+        Integer output = newQ.getNext();
+        assertNull(newQ.getNext());
     }
 }

@@ -22,23 +22,35 @@ import java.util.List;
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class Queue<T> {
-    private LinkedList<T> myList;
+    private LinkedList<T> head;
+    private LinkedList<T> tail;
     public Queue() {
-        myList = new LinkedList();
+        //myList = new LinkedList<T>();
     }
     
     public void add(T element) {
-        LinkedList lastElement = this.getLastElement();
-        lastElement.setNext(new LinkedList(element));
+        if (head == null) {
+            head = new LinkedList(element);
+            tail = head;
+        } else {
+            LinkedList lastElement = tail;
+            tail = new LinkedList(element);
+            lastElement.setNext(tail);
+        }
     }
     
     public T getNext() {
-        T retVal = myList.getInformation();
-        myList = myList.getNext();
+        T retVal;
+        if (head == null) {
+            retVal = null;
+        } else {
+            retVal = head.getInformation();
+            head = head.getNext();
+        }
         return retVal;
     }
     
-    private LinkedList getLastElement() {
+    private LinkedList getLastElement(LinkedList<T> myList) {
         LinkedList start = myList;
         while (start.getNext()!=null) {
             start = start.getNext();

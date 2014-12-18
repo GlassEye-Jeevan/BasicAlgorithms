@@ -21,4 +21,5 @@ package in.jeevankumar.util;
  */
 public interface Constants {
     public final int BOUND = 100;
+    public final String NEWLINE = "\n";
 }
