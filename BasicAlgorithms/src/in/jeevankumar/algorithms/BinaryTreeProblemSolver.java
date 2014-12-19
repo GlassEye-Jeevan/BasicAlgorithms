@@ -18,59 +18,64 @@ package in.jeevankumar.algorithms;
 import in.jeevankumar.util.Constants;
 import in.jeevankumar.util.Queue;
 import in.jeevankumar.util.Tree;
-import java.util.HashMap;
 
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class TreeProblemSolver<T extends Comparable> {
+public class BinaryTreeProblemSolver<T extends Comparable> {
     public static void main (String[] args) {
-        TreeProblemSolver<Integer> tps = new TreeProblemSolver<Integer>();
+        BinaryTreeProblemSolver<Integer> tps = new BinaryTreeProblemSolver<Integer>();
         tps.run();
     }
     
     public void run() {
-        int[] nodes = { 1,2,3,4,5,6,7,8,9,10,11};
-        int[][] edges = {
-                            {1,2},
-                            {1,3},
-                            {2,4},
-                            {2,5},
-                            {3,6},
-                            {3,7},
-                            {4,8},
-                            {4,9},
-                            {4,10},
-                            {4,11}
-                        };
-        Tree<Integer> root = this.createTree(nodes, edges);
-        int[] parentChildArray = { -1 ,0, 1, 6, 6, 0, 0, 2, 7 };
-        Tree<Integer> anotherRoot = this.createTree(parentChildArray);
-        levelOrderTraversal((Tree<T>) root);
+        //Tree<T> treeRoot = (Tree<T>) Helper.setUpBinaryTree((int)(Math.pow(2.0, 5) - 1.0 ), Constants.BOUND, false);
+        Tree<T> treeRoot = (Tree<T>) Helper.setUpBinaryTree((int)(8 ), Constants.BOUND, false);
+        /*preOrderTraversal(treeRoot);
+        System.out.println();
+        postOrderTraversal(treeRoot);
+        System.out.println();
+        inOrderTraversal(treeRoot);
+        
+        levelOrderTraversal(treeRoot);*/
+        //System.out.println("Max Element:    " + findMaxElement(treeRoot));
+        //System.out.println("Height Of Tree: " + heightOfBinaryTree(treeRoot));
+        //System.out.println("Deepest Node:   " + deepestNodeInBinaryTree(treeRoot));
+        int value1 = 8;
+        int value2 = 5;
+        inOrderTraversal(treeRoot);
+        System.out.println("\n");
+        System.out.println(leastCommonAncestorBinaryTree(treeRoot, value1, value2).getInfo());
+        treeRoot = mirrorBinaryTree(treeRoot);
+        inOrderTraversal(treeRoot);
+        System.out.println("");
+        System.out.println(leastCommonAncestorBinaryTree(treeRoot, value1, value2).getInfo());
         
     }
     
-    private Tree<Integer> createTree(int[] nodes, int[][] edges) {
-        HashMap<Integer, Tree<Integer>> nodeMap = new HashMap<>();
-        Tree<Integer> root = null;
-        Tree<Integer> temp;
-            
-        for(int i = 0; i<nodes.length; i++) {
-            temp = new Tree<Integer>(nodes[i]);
-            nodeMap.put(new Integer(nodes[i]), temp);
-            if (i==0) {
-                root = temp;
-            }
+    private void preOrderTraversal(Tree<T> root) {
+        System.out.print(root.getInfo() + " ");
+        for(Tree child : root.getChildren()) {
+            preOrderTraversal(child);
         }
-        
-        for(int i = 0; i<edges.length; i++) {
-            Tree<Integer> node = nodeMap.get( new Integer(edges[i][0]));
-            node.addChild(nodeMap.get(new Integer(edges[i][1])));
-            //System.out.println(node.getInfo() + " Adding Child " + edges[i][1]);
+    }
+    
+    private void postOrderTraversal(Tree<T> root) {
+        for(Tree child : root.getChildren()) {
+            postOrderTraversal(child);
         }
-        
-        return root;
+        System.out.print(root.getInfo() + " ");
+    }
+    
+    private void inOrderTraversal(Tree<T> root) {
+        if (root != null) {
+            //System.out.print("( ");
+            inOrderTraversal(root.getChild(0));
+            System.out.print(root.getInfo() + " ");
+            inOrderTraversal(root.getChild(1));
+            //System.out.print(") ");
+        }
     }
     
     private void levelOrderTraversal(Tree<T> root) {
@@ -85,9 +90,7 @@ public class TreeProblemSolver<T extends Comparable> {
                 System.out.print(currentNode.getInfo() + " ");
                 for (Tree<Integer> child : currentNode.getChildren()) {
                     nodeQueue.add(child);
-                    System.out.print(child.getInfo() + " ");
                 }
-                System.out.println();
             } while(nodeQueue.hasNext());
         }
         System.out.println("");
@@ -163,35 +166,32 @@ public class TreeProblemSolver<T extends Comparable> {
     }
     
     /**
-     * The height of a given tree. 
+     * The height of the binary tree. 
      * @param node
      * @return 
      */
-    private int heightOfTree(Tree<T> node) {
+    private int heightOfBinaryTree(Tree<T> node) {
         int retVal = 0;
         if(node!=null) {
-            int maxHeight = -1;
-            int currentHeight;
-            for (Tree child : node.getChildren()) {
-                currentHeight = 1 + heightOfTree(child);
-                if (currentHeight > maxHeight) {
-                    currentHeight = maxHeight;
-                }
-            }
+            int heightLeft;
+            int heigthRight;
             
-            retVal = maxHeight; 
+            heightLeft = 1 + heightOfBinaryTree(node.getChild(0));
+            heigthRight = 1 + heightOfBinaryTree(node.getChild(1));
+            
+            retVal = (heightLeft > heigthRight)? heightLeft: heigthRight; 
         }
         return retVal;
     }
     
     /**
-     * This function returns the deepest node in a Tree. The logic
+     * This function returns the deepest node in a Binary Tree. The logic
      * simply picks the last node added to the queue in a level order 
      * traversal.
      * @param root
      * @return 
      */
-    private T deepestNodeInATree(Tree<T> root) {
+    private T deepestNodeInBinaryTree(Tree<T> root) {
         T retVal = null;
         Tree<T> currentNode = null;
         if (root!=null) {
@@ -200,40 +200,64 @@ public class TreeProblemSolver<T extends Comparable> {
             //currentNode = root;
             do {
                 currentNode = parentQ.getNext();
-                for (int i = 0; i < currentNode.children(); i++) {
-                    parentQ.add(currentNode.getChild(i));
+                if(currentNode.children() > 0) {
+                    parentQ.add(currentNode.getChild(0));
+                } 
+                
+                if(currentNode.children() > 1) {
+                    parentQ.add(currentNode.getChild(1));
                 }
             } while(parentQ.hasNext());
-            retVal = currentNode.getInfo();
+            return currentNode.getInfo();
         }
         
         return retVal;
     }
+    
     /**
-     * Thins function creates a tree based on the parentChildArray. Where the 
-     * indicies of the array are children and the value in the array of a
-     * given index is the parent of the child. This is a quick way of defining 
-     * the tree.
-     * @param parentChildArray
+     * This function turns a binary tree into as it is reflected in a mirror.
+     * @param root
+     * @return
+     */
+    private Tree<T> mirrorBinaryTree(Tree<T> root) {
+        Tree<T> retVal = null;
+        if(root != null) {
+            Tree<T> leftChild = root.getChild(0);
+            Tree<T> rightChild = root.getChild(1);
+            //System.out.println("Switching " + ((leftChild!=null)?leftChild.getInfo():"") + " with " +  ((rightChild!=null)?rightChild.getInfo():"") );
+            root.resetChildren();
+            root.setChild(0,mirrorBinaryTree(rightChild));
+            root.setChild(1,mirrorBinaryTree(leftChild));
+            
+            retVal = root;
+        }
+        return retVal;
+    }
+    
+    /**
+     * This function find the lease common ancestor of two given values in a 
+     * given tree.
+     * @param root
+     * @param value1
+     * @param value2
      * @return 
      */
-    private Tree<Integer> createTree(int[] parentChildArray) {
-        HashMap<Integer, Tree<Integer>> nodeMap = new HashMap<>();
-        Tree<Integer> root = null;
-        Tree<Integer> temp;
-        for (int i = 0; i < parentChildArray.length; i++) {
-            temp = new Tree<Integer>(i);
-            nodeMap.put(i, temp);
-            if (i==0) {
-                root = temp;
+    private Tree<T> leastCommonAncestorBinaryTree(Tree<T> root, int value1, int value2) {
+        Tree<T> retVal = null;
+        Tree<T> left, right;
+        if (root != null) {
+            if((root.getInfo().compareTo(value1) == 0) || (root.getInfo().compareTo(value2) == 0)) {
+                retVal = root;
+            } else {
+                left = leastCommonAncestorBinaryTree(root.getChild(0), value1, value2);
+                right = leastCommonAncestorBinaryTree(root.getChild(1), value1, value2);
+                if(left != null && right != null) {
+                    retVal = root;
+                } else {
+                    retVal = (left != null)? left:right;
+                }
             }
         }
-        for (int i = 0; i < parentChildArray.length; i++) {
-            int parent = parentChildArray[i];
-            if (parent > -1)
-                nodeMap.get(parent).addChild(nodeMap.get(new Integer(i)));
-        }
-        
-        return root;
+        return retVal;
     }
 }   

@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Tree<T> {
+public class Tree<T extends Comparable> {
     private T info;
     private List<Tree> children;
 
@@ -39,7 +39,8 @@ public class Tree<T> {
         return info;
     }
     
-    public void addChild(Tree child) {
+    public void addChild(Tree<Integer> child) {
+        System.out.println(this.info + "Added Child " + child.getInfo());
         this.children.add(child);
     }
     
@@ -58,10 +59,30 @@ public class Tree<T> {
         return retVal;
     }
     
+    public void setChild(int index, Tree element ) {
+        if (element == null )
+            return;
+        for (int i = 0; i <= index; i++) {
+            
+            if (i == index) {
+                //System.out.println("Parent: " + this.getInfo() + " Added " + element.getInfo() + " at " + index);
+                if (i == this.children())
+                    this.children.add(element);
+                else 
+                    this.children.set(i, element);
+            } else if (this.getChild(i)==null) {
+                this.addChild(null);
+            } 
+        }
+        
+    }
+    
     public List<Tree> getChildren() {
-        List<Tree> retVal = new ArrayList<Tree>();
-        retVal.addAll(children);
-        return retVal;
+        return children;
+    }
+
+    public void resetChildren() {
+        this.children = new ArrayList<Tree>();
     }
     
 }

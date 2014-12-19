@@ -15,33 +15,41 @@
  */
 package in.jeevankumar.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class BinaryTree<T> {
-    private T left;
-    private T right;
-    
-    public BinaryTree(T left, T right) {
+    private T info;
+    private BinaryTree left;
+    private BinaryTree right;
+    public BinaryTree(T info, BinaryTree left, BinaryTree right) {
+        this.info = info;
         this.left = left;
         this.right = right;
     }
     
-    public T getRight() {
-        return right;
+    public BinaryTree(T info) {
+        this.info = info;
     }
     
-    public T getLeft() {
-        return left;
+    
+    public BinaryTree<T> getRight() {
+        return this.right;
     }
     
-    public void setRight(T right) {
+    public BinaryTree<T> getLeft() {
+        return this.left;
+    }
+    
+    public void setRight(BinaryTree right) {
         this.right = right;
     }
 
-    public void setLeft(T left) {
+    public void setLeft(BinaryTree left) {
         this.left = left;
     }
-    
 }

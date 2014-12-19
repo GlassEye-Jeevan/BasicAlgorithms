@@ -29,7 +29,7 @@ public class Helper {
     
     public static void main(String[] args) {
         
-        Helper.setUpRandomBinaryTree(16, Constants.BOUND);
+        Helper.setUpBinaryTree(16, Constants.BOUND, false);
     }
     
     /**
@@ -112,7 +112,7 @@ public class Helper {
      * @param size
      * @return 
      */    
-    public static Tree<Integer> setUpRandomBinaryTree(int size, int bound) {
+    public static Tree<Integer> setUpBinaryTree(int size, int bound, boolean randomNumbering) {
         Random rand = new Random();
         Queue<Tree> parentQueue = new Queue<Tree>();
         Tree parentWithOneChild = null; 
@@ -124,7 +124,8 @@ public class Helper {
         String RIGHT_STRING = " Right: ";
         StringBuffer output = new StringBuffer();
         for (int i = 0; i < size; i++) {
-            current = new Tree<Integer>(rand.nextInt(bound));
+            int value = randomNumbering?rand.nextInt(bound):i+1;
+            current = new Tree<Integer>(value);
             //current = new Tree<Integer>(i+1);
             parentQueue.add(current);
             if (head == null) {

@@ -50,6 +50,14 @@ public class Queue<T> {
         return retVal;
     }
     
+    public boolean hasNext() {
+        boolean retVal = false;
+        if (head != null) {
+            retVal = true;
+        }
+        return retVal;
+    }
+    
     private LinkedList getLastElement(LinkedList<T> myList) {
         LinkedList start = myList;
         while (start.getNext()!=null) {
