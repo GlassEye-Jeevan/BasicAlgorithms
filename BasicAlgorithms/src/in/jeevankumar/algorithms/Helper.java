@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.util.Constants;
 import in.jeevankumar.util.LinkedList;
 import in.jeevankumar.util.Queue;
@@ -112,12 +113,12 @@ public class Helper {
      * @param size
      * @return 
      */    
-    public static Tree<Integer> setUpBinaryTree(int size, int bound, boolean randomNumbering) {
+    public static BinaryTree<Integer> setUpBinaryTree(int size, int bound, boolean randomNumbering) {
         Random rand = new Random();
-        Queue<Tree> parentQueue = new Queue<Tree>();
-        Tree parentWithOneChild = null; 
-        Tree head = null;
-        Tree current;
+        Queue<BinaryTree> parentQueue = new Queue<BinaryTree>();
+        BinaryTree parentWithOneChild = null; 
+        BinaryTree head = null;
+        BinaryTree current;
         String ROOT_STRING = "Root: ";
         String PARENT_STRING = "Parent: ";
         String LEFT_STRING = " Left: ";
@@ -125,7 +126,7 @@ public class Helper {
         StringBuffer output = new StringBuffer();
         for (int i = 0; i < size; i++) {
             int value = randomNumbering?rand.nextInt(bound):i+1;
-            current = new Tree<Integer>(value);
+            current = new BinaryTree<Integer>(value);
             //current = new Tree<Integer>(i+1);
             parentQueue.add(current);
             if (head == null) {
@@ -133,13 +134,13 @@ public class Helper {
                 output.append(ROOT_STRING).append(head.getInfo())
                         .append(Constants.NEWLINE);
             } else if(parentWithOneChild != null) {
-                parentWithOneChild.addChild(current);
+                parentWithOneChild.setRight(current);
                 output.append(RIGHT_STRING).append(current.getInfo())
                         .append(Constants.NEWLINE);
                 parentWithOneChild = null;
             } else {
-                Tree newParent = parentQueue.getNext();
-                newParent.addChild(current);
+                BinaryTree newParent = parentQueue.getNext();
+                newParent.setLeft(current);
                 parentWithOneChild = newParent;
                 output.append(PARENT_STRING).append(newParent.getInfo())
                         .append(LEFT_STRING).append(current.getInfo());

@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.util.Constants;
 import in.jeevankumar.util.Queue;
 import in.jeevankumar.util.Tree;
@@ -25,13 +26,13 @@ import in.jeevankumar.util.Tree;
  */
 public class BinaryTreeProblemSolver<T extends Comparable> {
     public static void main (String[] args) {
-        BinaryTreeProblemSolver<Integer> tps = new BinaryTreeProblemSolver<Integer>();
-        tps.run();
+        BinaryTreeProblemSolver<Integer> btps = new BinaryTreeProblemSolver<Integer>();
+        btps.run();
     }
     
     public void run() {
         //Tree<T> treeRoot = (Tree<T>) Helper.setUpBinaryTree((int)(Math.pow(2.0, 5) - 1.0 ), Constants.BOUND, false);
-        Tree<T> treeRoot = (Tree<T>) Helper.setUpBinaryTree((int)(8 ), Constants.BOUND, false);
+        BinaryTree<Integer> treeRoot = Helper.setUpBinaryTree((int)(8 ), Constants.BOUND, false);
         /*preOrderTraversal(treeRoot);
         System.out.println();
         postOrderTraversal(treeRoot);
@@ -54,33 +55,35 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
         
     }
     
-    private void preOrderTraversal(Tree<T> root) {
-        System.out.print(root.getInfo() + " ");
-        for(Tree child : root.getChildren()) {
-            preOrderTraversal(child);
+    private void preOrderTraversal(BinaryTree<T> root) {
+        if(root != null) {
+            System.out.print(root.getInfo() + " ");
+                preOrderTraversal(root.getLeft());
+                preOrderTraversal(root.getRight());
         }
     }
     
-    private void postOrderTraversal(Tree<T> root) {
-        for(Tree child : root.getChildren()) {
-            postOrderTraversal(child);
+    private void postOrderTraversal(BinaryTree<T> root) {
+        if(root != null) {
+            postOrderTraversal(root.getLeft());
+            postOrderTraversal(root.getRight());
+            System.out.print(root.getInfo() + " ");
         }
-        System.out.print(root.getInfo() + " ");
     }
     
-    private void inOrderTraversal(Tree<T> root) {
+    private void inOrderTraversal(BinaryTree root) {
         if (root != null) {
             //System.out.print("( ");
-            inOrderTraversal(root.getChild(0));
+            inOrderTraversal(root.getLeft());
             System.out.print(root.getInfo() + " ");
-            inOrderTraversal(root.getChild(1));
+            inOrderTraversal(root.getRight());
             //System.out.print(") ");
         }
     }
     
-    private void levelOrderTraversal(Tree<T> root) {
-        Queue<Tree> nodeQueue = new Queue<Tree>();
-        Tree<T> currentNode = null;
+    private void levelOrderTraversal(BinaryTree root) {
+        Queue<BinaryTree> nodeQueue = new Queue<BinaryTree>();
+        BinaryTree<T> currentNode = null;
         System.out.println("");
         if(root!=null) {
             nodeQueue.add(root);
@@ -88,8 +91,12 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
             do {
                 currentNode = nodeQueue.getNext();
                 System.out.print(currentNode.getInfo() + " ");
-                for (Tree<Integer> child : currentNode.getChildren()) {
-                    nodeQueue.add(child);
+                if(currentNode.getLeft() != null) {
+                    nodeQueue.add(currentNode.getLeft());
+                }
+                
+                if(currentNode.getRight() != null) {
+                    nodeQueue.add(currentNode.getRight());
                 }
             } while(nodeQueue.hasNext());
         }
@@ -103,9 +110,9 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @param root
      * @return 
      */
-    private T findMaxElement(Tree<T> root) {
-        Queue<Tree> nodeQueue = new Queue<Tree>();
-        Tree<T> currentNode = null;
+    private T findMaxElement(BinaryTree<T> root) {
+        Queue<BinaryTree> nodeQueue = new Queue<BinaryTree>();
+        BinaryTree<T> currentNode = null;
         T retVal = null;
         //System.out.println("");
         if(root!=null) {
@@ -119,8 +126,12 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
                     retVal = currentNode.getInfo();
                 }
                 //System.out.print(currentNode.getInfo() + " ");
-                for (Tree<Integer> child : currentNode.getChildren()) {
-                    nodeQueue.add(child);
+                if(currentNode.getLeft() != null) {
+                    nodeQueue.add(currentNode.getLeft());
+                }
+                
+                if(currentNode.getRight() != null) {
+                    nodeQueue.add(currentNode.getRight());
                 }
             } while(nodeQueue.hasNext());
         }
@@ -136,10 +147,10 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @param nodeVal
      * @return  
      */
-    private Tree<T> searchElement(Tree<T> root, int nodeVal) {
-        Queue<Tree> nodeQueue = new Queue<Tree>();
-        Tree<T> currentNode = null;
-        Tree<T> retVal = null;
+    private BinaryTree<T> searchElement(BinaryTree<T> root, int nodeVal) {
+        Queue<BinaryTree> nodeQueue = new Queue<BinaryTree>();
+        BinaryTree<T> currentNode = null;
+        BinaryTree<T> retVal = null;
         //System.out.println("");
         if(root!=null) {
             nodeQueue.add(root);
@@ -155,8 +166,12 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
                     break;
                 }
                 //System.out.print(currentNode.getInfo() + " x  ");
-                for (Tree<Integer> child : currentNode.getChildren()) {
-                    nodeQueue.add(child);
+                if(currentNode.getLeft() != null) {
+                    nodeQueue.add(currentNode.getLeft());
+                }
+                
+                if(currentNode.getRight() != null) {
+                    nodeQueue.add(currentNode.getRight());
                 }
             } while(nodeQueue.hasNext());
         }
@@ -170,14 +185,14 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @param node
      * @return 
      */
-    private int heightOfBinaryTree(Tree<T> node) {
+    private int heightOfBinaryTree(BinaryTree<T> node) {
         int retVal = 0;
         if(node!=null) {
             int heightLeft;
             int heigthRight;
             
-            heightLeft = 1 + heightOfBinaryTree(node.getChild(0));
-            heigthRight = 1 + heightOfBinaryTree(node.getChild(1));
+            heightLeft = 1 + heightOfBinaryTree(node.getLeft());
+            heigthRight = 1 + heightOfBinaryTree(node.getRight());
             
             retVal = (heightLeft > heigthRight)? heightLeft: heigthRight; 
         }
@@ -191,21 +206,21 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @param root
      * @return 
      */
-    private T deepestNodeInBinaryTree(Tree<T> root) {
+    private T deepestNodeInBinaryTree(BinaryTree<T> root) {
         T retVal = null;
-        Tree<T> currentNode = null;
+        BinaryTree<T> currentNode = null;
         if (root!=null) {
-            Queue<Tree> parentQ = new Queue<Tree>();
+            Queue<BinaryTree> parentQ = new Queue<BinaryTree>();
             parentQ.add(root);
             //currentNode = root;
             do {
                 currentNode = parentQ.getNext();
-                if(currentNode.children() > 0) {
-                    parentQ.add(currentNode.getChild(0));
-                } 
+                if(currentNode.getLeft() != null) {
+                    parentQ.add(currentNode.getLeft());
+                }
                 
-                if(currentNode.children() > 1) {
-                    parentQ.add(currentNode.getChild(1));
+                if(currentNode.getRight() != null) {
+                    parentQ.add(currentNode.getRight());
                 }
             } while(parentQ.hasNext());
             return currentNode.getInfo();
@@ -219,15 +234,15 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @param root
      * @return
      */
-    private Tree<T> mirrorBinaryTree(Tree<T> root) {
-        Tree<T> retVal = null;
+    private BinaryTree mirrorBinaryTree(BinaryTree root) {
+        BinaryTree<T> retVal = null;
         if(root != null) {
-            Tree<T> leftChild = root.getChild(0);
-            Tree<T> rightChild = root.getChild(1);
+            BinaryTree<T> leftChild = root.getLeft();
+            BinaryTree<T> rightChild = root.getRight();
             //System.out.println("Switching " + ((leftChild!=null)?leftChild.getInfo():"") + " with " +  ((rightChild!=null)?rightChild.getInfo():"") );
-            root.resetChildren();
-            root.setChild(0,mirrorBinaryTree(rightChild));
-            root.setChild(1,mirrorBinaryTree(leftChild));
+            //root.resetChildren();
+            root.setLeft(mirrorBinaryTree(rightChild));
+            root.setRight(mirrorBinaryTree(leftChild));
             
             retVal = root;
         }
@@ -242,15 +257,15 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @param value2
      * @return 
      */
-    private Tree<T> leastCommonAncestorBinaryTree(Tree<T> root, int value1, int value2) {
-        Tree<T> retVal = null;
-        Tree<T> left, right;
+    private BinaryTree leastCommonAncestorBinaryTree(BinaryTree root, int value1, int value2) {
+        BinaryTree<T> retVal = null;
+        BinaryTree<T> left, right;
         if (root != null) {
-            if((root.getInfo().compareTo(value1) == 0) || (root.getInfo().compareTo(value2) == 0)) {
+            if((root.getInfo().compareTo(new Integer(value1)) == 0) || (root.getInfo().compareTo(new Integer(value2)) == 0)) {
                 retVal = root;
             } else {
-                left = leastCommonAncestorBinaryTree(root.getChild(0), value1, value2);
-                right = leastCommonAncestorBinaryTree(root.getChild(1), value1, value2);
+                left = leastCommonAncestorBinaryTree(root.getLeft(), value1, value2);
+                right = leastCommonAncestorBinaryTree(root.getRight(), value1, value2);
                 if(left != null && right != null) {
                     retVal = root;
                 } else {

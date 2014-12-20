@@ -76,6 +76,19 @@ public class BinarySearchTree<T extends Comparable> {
         this.right = right;
     }
     
-    
-    
+    public void add(BinarySearchTree<T> element) {
+        if (this.getInfo().compareTo(element) > 0) {
+            if (this.getRight() != null) {
+                this.getRight().add(element);
+            } else {
+                this.setRight(element);
+            }
+        } else {
+            if(this.getLeft() != null) {
+                this.getLeft().add(element);
+            } else {
+                this.setLeft(element);
+            }
+        }
+    }
 }

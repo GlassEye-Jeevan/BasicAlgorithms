@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class BinaryTree<T> {
+public class BinaryTree<T extends Comparable> {
     private T info;
     private BinaryTree left;
     private BinaryTree right;
@@ -51,5 +51,19 @@ public class BinaryTree<T> {
 
     public void setLeft(BinaryTree left) {
         this.left = left;
+    }
+
+    /**
+     * @return the info
+     */
+    public T getInfo() {
+        return info;
+    }
+
+    /**
+     * @param info the info to set
+     */
+    public void setInfo(T info) {
+        this.info = info;
     }
 }
