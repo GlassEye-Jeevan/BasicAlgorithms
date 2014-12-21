@@ -40,7 +40,7 @@ public class Tree<T extends Comparable> {
     }
     
     public void addChild(Tree<Integer> child) {
-        System.out.println(this.info + "Added Child " + child.getInfo());
+        //System.out.println(this.info + "Added Child " + child.getInfo());
         this.children.add(child);
     }
     

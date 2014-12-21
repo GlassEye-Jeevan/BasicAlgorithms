@@ -18,6 +18,7 @@ package in.jeevankumar.algorithms;
 import in.jeevankumar.util.Constants;
 import in.jeevankumar.util.Queue;
 import in.jeevankumar.util.Tree;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -27,27 +28,37 @@ import java.util.HashMap;
 public class TreeProblemSolver<T extends Comparable> {
     public static void main (String[] args) {
         TreeProblemSolver<Integer> tps = new TreeProblemSolver<Integer>();
-        tps.run();
+        tps.run(args);
     }
     
-    public void run() {
-        int[] nodes = { 1,2,3,4,5,6,7,8,9,10,11};
-        int[][] edges = {
-                            {1,2},
-                            {1,3},
-                            {2,4},
-                            {2,5},
-                            {3,6},
-                            {3,7},
-                            {4,8},
-                            {4,9},
-                            {4,10},
-                            {4,11}
-                        };
-        Tree<Integer> root = this.createTree(nodes, edges);
-        int[] parentChildArray = { -1 ,0, 1, 6, 6, 0, 0, 2, 7 };
-        Tree<Integer> anotherRoot = this.createTree(parentChildArray);
-        levelOrderTraversal((Tree<T>) root);
+    public void run(String[] args) {
+        String command = args[0];
+        String parents = args[1];
+        Tree<Integer> anotherRoot = this.createTree(parents);
+        String[] algoList = { 
+            "LevelOrderTraversal",
+            "MaxElement",
+            "FindElement"
+        };
+        switch(command) {
+            case "LevelOrderTraversal":
+                levelOrderTraversal((Tree<T>) anotherRoot);
+                break;
+            case "MaxElement":
+                findMaxElement((Tree<T>) anotherRoot);
+                break;
+            case "FindElement":
+                searchElement((Tree<T>) anotherRoot, Integer.parseInt(args[2]));
+                break;
+            case "DeepestNode":
+                deepestNodeInATree((Tree<T>) anotherRoot);
+                break;
+            default:
+                System.out.println("Unrecognized Command \n "
+                        + "Usage: java TreeProblemSolver <Algorithm Name> <list of parents>");
+                System.out.println(Arrays.toString(algoList));
+                
+        }
         
     }
     
@@ -72,26 +83,66 @@ public class TreeProblemSolver<T extends Comparable> {
         
         return root;
     }
+    /**
+     * Thins function creates a tree based on the parentChildArray. Where the 
+     * indicies of the array are children and the value in the array of a
+     * given index is the parent of the child. This is a quick way of defining 
+     * the tree.
+     * @param parentChildArray
+     * @return 
+     */
+    private Tree<Integer> createTree(int[] parentChildArray) {
+        HashMap<Integer, Tree<Integer>> nodeMap = new HashMap<>();
+        Tree<Integer> root = null;
+        Tree<Integer> temp;
+        for (int i = 0; i < parentChildArray.length; i++) {
+            temp = new Tree<Integer>(i);
+            nodeMap.put(i, temp);
+            if (i==0) {
+                root = temp;
+            }
+        }
+        for (int i = 0; i < parentChildArray.length; i++) {
+            int parent = parentChildArray[i];
+            if (parent > -1)
+                nodeMap.get(parent).addChild(nodeMap.get(new Integer(i)));
+        }
+        
+        return root;
+    }
+    /**
+     * This is a wrapper for createTree(int[]). This function has been written
+     * to access input as a comma seperated integer values. It reads the 
+     * String, and converts it into an integer array and then calls 
+     * createTree(int[])
+     * @param input
+     * @return 
+     */
+    private Tree<Integer> createTree(String input) {
+        String split = ",";
+        String[] inputs = input.split(split);
+        int[] parents = new int[inputs.length];
+        for (int i = 0; i < inputs.length; i++) {
+            parents[i] = Integer.parseInt(inputs[i]);
+        }
+        return createTree(parents);
+    }
     
     private void levelOrderTraversal(Tree<T> root) {
         Queue<Tree> nodeQueue = new Queue<Tree>();
         Tree<T> currentNode = null;
-        System.out.println("");
         if(root!=null) {
             nodeQueue.add(root);
             currentNode = root;
             do {
                 currentNode = nodeQueue.getNext();
                 System.out.print(currentNode.getInfo() + " ");
-                for (Tree<Integer> child : currentNode.getChildren()) {
+                for (Tree<T> child : currentNode.getChildren()) {
                     nodeQueue.add(child);
-                    System.out.print(child.getInfo() + " ");
                 }
-                System.out.println();
             } while(nodeQueue.hasNext());
         }
-        System.out.println("");
-        
+        System.out.println();
     }
     
     /**
@@ -104,7 +155,6 @@ public class TreeProblemSolver<T extends Comparable> {
         Queue<Tree> nodeQueue = new Queue<Tree>();
         Tree<T> currentNode = null;
         T retVal = null;
-        //System.out.println("");
         if(root!=null) {
             nodeQueue.add(root);
             currentNode = root;
@@ -115,13 +165,11 @@ public class TreeProblemSolver<T extends Comparable> {
                 if(info.compareTo(retVal) > 0) {
                     retVal = currentNode.getInfo();
                 }
-                //System.out.print(currentNode.getInfo() + " ");
                 for (Tree<Integer> child : currentNode.getChildren()) {
                     nodeQueue.add(child);
                 }
             } while(nodeQueue.hasNext());
         }
-        //System.out.println("");
         
         return retVal;
     }
@@ -137,11 +185,9 @@ public class TreeProblemSolver<T extends Comparable> {
         Queue<Tree> nodeQueue = new Queue<Tree>();
         Tree<T> currentNode = null;
         Tree<T> retVal = null;
-        //System.out.println("");
         if(root!=null) {
             nodeQueue.add(root);
             currentNode = root;
-            //retVal = root;
             do {
                 currentNode = nodeQueue.getNext();
                 if (currentNode==null)
@@ -157,8 +203,6 @@ public class TreeProblemSolver<T extends Comparable> {
                 }
             } while(nodeQueue.hasNext());
         }
-        //System.out.println("");
-        
         return retVal;
     }
     
@@ -208,32 +252,5 @@ public class TreeProblemSolver<T extends Comparable> {
         }
         
         return retVal;
-    }
-    /**
-     * Thins function creates a tree based on the parentChildArray. Where the 
-     * indicies of the array are children and the value in the array of a
-     * given index is the parent of the child. This is a quick way of defining 
-     * the tree.
-     * @param parentChildArray
-     * @return 
-     */
-    private Tree<Integer> createTree(int[] parentChildArray) {
-        HashMap<Integer, Tree<Integer>> nodeMap = new HashMap<>();
-        Tree<Integer> root = null;
-        Tree<Integer> temp;
-        for (int i = 0; i < parentChildArray.length; i++) {
-            temp = new Tree<Integer>(i);
-            nodeMap.put(i, temp);
-            if (i==0) {
-                root = temp;
-            }
-        }
-        for (int i = 0; i < parentChildArray.length; i++) {
-            int parent = parentChildArray[i];
-            if (parent > -1)
-                nodeMap.get(parent).addChild(nodeMap.get(new Integer(i)));
-        }
-        
-        return root;
     }
 }   
