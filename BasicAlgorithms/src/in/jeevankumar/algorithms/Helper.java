@@ -16,7 +16,7 @@
 package in.jeevankumar.algorithms;
 
 import in.jeevankumar.util.BinaryTree;
-import in.jeevankumar.util.Constants;
+import in.jeevankumar.algorithms.config.Constants;
 import in.jeevankumar.util.LinkedListNode;
 import in.jeevankumar.util.Queue;
 import in.jeevankumar.util.Tree;

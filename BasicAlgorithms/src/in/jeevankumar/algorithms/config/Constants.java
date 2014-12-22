@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.jeevankumar.util;
+package in.jeevankumar.algorithms.config;
 
 /**
  *
