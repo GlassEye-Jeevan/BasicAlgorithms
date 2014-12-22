@@ -22,19 +22,19 @@ import java.util.List;
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class Queue<T> {
-    private LinkedList<T> head;
-    private LinkedList<T> tail;
+    private LinkedListNode<T> head;
+    private LinkedListNode<T> tail;
     public Queue() {
-        //myList = new LinkedList<T>();
+        //myList = new LinkedListNode<T>();
     }
     
     public void add(T element) {
         if (head == null) {
-            head = new LinkedList(element);
+            head = new LinkedListNode(element);
             tail = head;
         } else {
-            LinkedList lastElement = tail;
-            tail = new LinkedList(element);
+            LinkedListNode lastElement = tail;
+            tail = new LinkedListNode(element);
             lastElement.setNext(tail);
         }
     }
@@ -58,8 +58,8 @@ public class Queue<T> {
         return retVal;
     }
     
-    private LinkedList getLastElement(LinkedList<T> myList) {
-        LinkedList start = myList;
+    private LinkedListNode getLastElement(LinkedListNode<T> myList) {
+        LinkedListNode start = myList;
         while (start.getNext()!=null) {
             start = start.getNext();
         }

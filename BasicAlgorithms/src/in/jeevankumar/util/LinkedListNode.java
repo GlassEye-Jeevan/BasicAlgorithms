@@ -19,15 +19,15 @@ package in.jeevankumar.util;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class LinkedList <T>{
+public class LinkedListNode <T>{
     private T information;
-    private LinkedList next;
+    private LinkedListNode next;
     
-    public LinkedList() {
+    public LinkedListNode() {
         this.next = null;
     }
     
-    public LinkedList(T info) {
+    public LinkedListNode(T info) {
         this.information = info;
         this.next = null;
     }
@@ -48,23 +48,23 @@ public class LinkedList <T>{
     /**
      * @return the next
      */
-    public LinkedList getNext() {
+    public LinkedListNode getNext() {
         return next;
     }
 
     /**
      * @param next the next to set
      */
-    public void setNext(LinkedList next) {
+    public void setNext(LinkedListNode next) {
         this.next = next;
     }
     
     @Override
     public String toString() {
-        LinkedList head = this;
+        LinkedListNode head = this;
         StringBuffer sb = new StringBuffer();
         while (head!=null) {
-            sb.append(head.information)
+            sb.append(head.information.toString())
                     .append(", ");
             head = head.next;
         }

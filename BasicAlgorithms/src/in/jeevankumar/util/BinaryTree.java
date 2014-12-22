@@ -26,6 +26,8 @@ public class BinaryTree<T extends Comparable> {
     private T info;
     private BinaryTree left;
     private BinaryTree right;
+    private BinaryTree parent;
+    
     public BinaryTree(T info, BinaryTree left, BinaryTree right) {
         this.info = info;
         this.left = left;
@@ -65,5 +67,19 @@ public class BinaryTree<T extends Comparable> {
      */
     public void setInfo(T info) {
         this.info = info;
+    }
+
+    /**
+     * @return the parent
+     */
+    public BinaryTree getParent() {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(BinaryTree parent) {
+        this.parent = parent;
     }
 }

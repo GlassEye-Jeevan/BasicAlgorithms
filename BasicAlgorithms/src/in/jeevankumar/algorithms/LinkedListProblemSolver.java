@@ -15,7 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
-import in.jeevankumar.util.LinkedList;
+import in.jeevankumar.util.LinkedListNode;
 
 /**
  *
@@ -35,12 +35,12 @@ public class LinkedListProblemSolver {
     
     public void generateRandomLLAndPrint() {
         int size = 10;
-        LinkedList head = Helper.generateRandomList(size);
+        LinkedListNode head = Helper.generateRandomList(size);
         System.out.println(head.toString());
     }
     
     private void reverseLinkedListRunner() {
-        LinkedList head = Helper.generateRandomList(4);
+        LinkedListNode head = Helper.generateRandomList(4);
         System.out.println("Base List  " + head);
         
         head = this.reverseLinkedList(head);
@@ -52,9 +52,11 @@ public class LinkedListProblemSolver {
      * @param head
      * @return 
      */
-    private LinkedList reverseLinkedList(LinkedList head) {
-        LinkedList retVal, second;
+    private LinkedListNode reverseLinkedList(LinkedListNode head) {
+        LinkedListNode retVal;
+        LinkedListNode second;
         //System.out.println("reversing " + head.getInformation());
+        
             
         if (head == null) {
             retVal = head;  
@@ -82,10 +84,10 @@ public class LinkedListProblemSolver {
      * This function solves the Josephus problem using Linked List. 
      */
     private int josephusSolver(int size, int m) {
-        LinkedList<Integer> josephusList = Helper.generateSequentialLinkedList(size);
+        LinkedListNode<Integer> josephusList = Helper.generateSequentialLinkedList(size);
         System.out.println("input " + josephusList.toString());
         
-        LinkedList lastNode = this.getLastNode(josephusList);
+        LinkedListNode lastNode = this.getLastNode(josephusList);
         
         lastNode.setNext(josephusList);
         int i = 1;
@@ -102,8 +104,9 @@ public class LinkedListProblemSolver {
         return josephusList.getInformation();
     }
     
-    private LinkedList getLastNode(LinkedList head) {
-        LinkedList temp, retVal = null;
+    private LinkedListNode getLastNode(LinkedListNode head) {
+        LinkedListNode temp;
+        LinkedListNode retVal = null;
         //temp = head;
         while(head.getNext()!=null) {
             head = head.getNext();

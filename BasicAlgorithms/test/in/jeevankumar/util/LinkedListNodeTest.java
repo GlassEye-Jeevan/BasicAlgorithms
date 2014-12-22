@@ -24,9 +24,9 @@ import org.junit.Test;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class LinkedListTest extends TestCase {
+public class LinkedListNodeTest extends TestCase {
     
-    public LinkedListTest(String testName) {
+    public LinkedListNodeTest(String testName) {
         super(testName);
     }
     
@@ -42,9 +42,17 @@ public class LinkedListTest extends TestCase {
     public void testLinkedList() {
         Random rand = new Random();
         int random = rand.nextInt();
-        LinkedList<Integer> temp = new LinkedList<Integer>(random);
+        LinkedListNode<Integer> temp = new LinkedListNode<Integer>(random);
         assertEquals(temp.getInformation().intValue(), random);
         assertNull(temp.getNext());
+        /*int limit = rand.nextInt(Constants.BOUND);
+        int[] numbers = new int[limit];
+        for (int i = 0; i < limit; i++) {
+            numbers[i] = rand.nextInt();
+            LinkedListNode<Integer> newItem = new LinkedListNode(numbers[i]);
+            
+        }
+                */
     }
     
 }

@@ -17,7 +17,7 @@ package in.jeevankumar.algorithms;
 
 import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.util.Constants;
-import in.jeevankumar.util.LinkedList;
+import in.jeevankumar.util.LinkedListNode;
 import in.jeevankumar.util.Queue;
 import in.jeevankumar.util.Tree;
 import java.util.Random;
@@ -61,16 +61,16 @@ public class Helper {
         return unsorted;
     }
     
-    public static LinkedList generateRandomList(int size) {
-        LinkedList retVal = null;
-        LinkedList head = null;
-        LinkedList current = null;
-        LinkedList previous = null;
+    public static LinkedListNode generateRandomList(int size) {
+        LinkedListNode retVal = null;
+        LinkedListNode head = null;
+        LinkedListNode current = null;
+        LinkedListNode previous = null;
         
         Random rand = new Random();
         for (int i = 0; i < size; i++) {
             int randomInt = rand.nextInt(Constants.BOUND);
-            current = new LinkedList(randomInt);
+            current = new LinkedListNode(randomInt);
             
             if (previous != null) {
                 previous.setNext(current);
@@ -85,14 +85,14 @@ public class Helper {
         return retVal;
     }
     
-    public static LinkedList generateSequentialLinkedList(int size) {
-        LinkedList<Integer> retVal = null;
-        LinkedList<Integer> head = null;
-        LinkedList<Integer> current = null;
-        LinkedList<Integer> previous = null;
+    public static LinkedListNode generateSequentialLinkedList(int size) {
+        LinkedListNode<Integer> retVal = null;
+        LinkedListNode<Integer> head = null;
+        LinkedListNode<Integer> current = null;
+        LinkedListNode<Integer> previous = null;
         
         for (int i = 0; i < size; i++) {
-            current = new LinkedList(new Integer(i));
+            current = new LinkedListNode(new Integer(i));
             
             if (previous != null) {
                 previous.setNext(current);
