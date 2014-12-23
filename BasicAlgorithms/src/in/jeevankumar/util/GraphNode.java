@@ -59,4 +59,9 @@ public class GraphNode<T> {
     public LinkedListNode getAdjNodes() {
         return adjNodes;
     }
+    
+    @Override
+    public String toString() {
+        return this.Info.toString();
+    }
 }

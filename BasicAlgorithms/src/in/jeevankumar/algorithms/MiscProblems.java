@@ -15,7 +15,8 @@
  */
 package in.jeevankumar.algorithms;
 
-import in.jeevankumar.util.IntegerMinHeap;
+import in.jeevankumar.util.IntMinHeap;
+import in.jeevankumar.util.IntMaxHeap;
 import java.util.Arrays;
 
 /**
@@ -39,12 +40,12 @@ public class MiscProblems {
                 break;
             case "AddToHeap":
                 int[] integers = Helper.stringToIntArray(args[1]);
-                System.out.println(Arrays.toString(integers));
-                IntegerMinHeap heap = addToHeap(integers);
+                System.out.println("Input " + Arrays.toString(integers));
+                IntMinHeap heap = addToHeap(integers);
                 heap.printLevelOrderTraversal();
-                heap.removeTop();heap.printLevelOrderTraversal();
-                heap.removeTop();heap.printLevelOrderTraversal();
-                heap.removeTop();heap.printLevelOrderTraversal();
+                System.out.print("Removing top " + heap.removeTop()+ " ");heap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ heap.removeTop()+ " ");heap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ heap.removeTop()+ " ");heap.printLevelOrderTraversal();
                 break;
         }
     }
@@ -66,8 +67,8 @@ public class MiscProblems {
         return inputMatrix;
     }
     
-    private IntegerMinHeap addToHeap(int[] inputs) {
-        IntegerMinHeap myHeap = new IntegerMinHeap();
+    private IntMinHeap addToHeap(int[] inputs) {
+        IntMinHeap myHeap = new IntMinHeap();
         for(int i = 0; i < inputs.length; i++) {
             myHeap.add(inputs[i]);
         }

@@ -149,4 +149,16 @@ public class Helper {
         System.out.println(output.toString());
         return head;
     }
+    /**
+     * Set all the values in the integer array to value. 
+     * @param input
+     * @param value
+     * @return 
+     */
+    public static int[] setAll (int[] input, int value) {
+        for (int i = 0; i < input.length; i++) {
+            input[i] = value;
+        }
+        return input;
+    }
 }
