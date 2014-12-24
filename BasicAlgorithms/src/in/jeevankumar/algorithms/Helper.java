@@ -20,7 +20,13 @@ import in.jeevankumar.algorithms.config.Constants;
 import in.jeevankumar.util.LinkedListNode;
 import in.jeevankumar.util.Queue;
 import in.jeevankumar.util.Tree;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilterReader;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -161,4 +167,23 @@ public class Helper {
         }
         return input;
     }
+
+    static int[] readFileIntoIntArray(String inputFileName) {
+        int[] retVal = null;
+        try {
+            Scanner sc = new Scanner(new File(inputFileName));
+            
+            String inputString = sc.nextLine();
+            
+            retVal = Helper.stringToIntArray(inputString);
+            
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return retVal;
+    }
+    
 }

@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- *
+ * 
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class GraphProblemSolver {
@@ -65,6 +65,7 @@ public class GraphProblemSolver {
                 int noOfEdges = Integer.parseInt(args[2]);
                 inputNodeMap = createGraphBasedOnEdgeList(args, 3, inputNodeMap, noOfNodes, noOfEdges );
                 unweightedShortestPath(inputNodeMap.get(new Integer(2)), noOfNodes, 0);
+                //java UnweightedShortestPath 7 10 0-1 0-3 1-3 1-4 2-0 2-5 3-5 3-6 4-6 6-5
                 break;
             case "Djikstra":
                 Graph graph = readGraph(args[1], false);

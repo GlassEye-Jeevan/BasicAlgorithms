@@ -1,6 +1,8 @@
 package in.jeevankumar.util.wip;
 
 /**
+ * This class represents an edge of a Graph. It has a link to the next edge. 
+ * The class also has an integer weight indicator. 
  * From UTSA, http://www.cs.utsa.edu/~wagner/CS3343/newgraph/graphrep.html
  * @author  Donald Knuth
  */

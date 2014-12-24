@@ -17,6 +17,7 @@ package in.jeevankumar.algorithms;
 
 import in.jeevankumar.util.IntMinHeap;
 import in.jeevankumar.util.IntMaxHeap;
+import in.jeevankumar.util.MinHeap;
 import java.util.Arrays;
 
 /**
@@ -46,6 +47,23 @@ public class MiscProblems {
                 System.out.print("Removing top " + heap.removeTop()+ " ");heap.printLevelOrderTraversal();
                 System.out.print("Removing top "+ heap.removeTop()+ " ");heap.printLevelOrderTraversal();
                 System.out.print("Removing top "+ heap.removeTop()+ " ");heap.printLevelOrderTraversal();
+                //java AddToHeap 40,15,20,13,8,22,100
+                break;
+            case "GenericMinHeap":
+                String inputFileName = args[1];
+                integers = Helper.readFileIntoIntArray(inputFileName);
+                System.out.println("Input " + Arrays.toString(integers));
+                //MinHeap<Integer> minHeap = new MinHeap<Integer>();
+                MinHeap<Integer> minHeap = addToGenericMinHeap(integers);
+                minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top " + minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
+                System.out.print("Removing top "+ minHeap.removeTop()+ " ");minHeap.printLevelOrderTraversal();
                 break;
         }
     }
@@ -90,5 +108,13 @@ public class MiscProblems {
             }
         }
         return output;
+    }
+
+    private MinHeap<Integer> addToGenericMinHeap(int[] inputs) {
+        MinHeap<Integer> myHeap = new MinHeap<Integer>();
+        for(int i = 0; i < inputs.length; i++) {
+            myHeap.add(new Integer(inputs[i]));
+        }
+        return myHeap;
     }
 }

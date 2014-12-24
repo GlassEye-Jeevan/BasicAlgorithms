@@ -32,9 +32,10 @@ public class MinHeap<T extends Comparable> {
     }
     
     public ArrayList<T> add(T element) {
-        
-        elements.set(size++ , element);
-        int insertIndex = size - 1;
+        //System.out.println("Adding " + element.toString());
+        elements.add(element);
+        //size++;
+        int insertIndex = elements.size() - 1;
         int currentIndex = insertIndex;
         int parentIndex = (currentIndex - 1)/2;
         T temp;
@@ -61,27 +62,33 @@ public class MinHeap<T extends Comparable> {
     }
     
     public T removeTop() {
-        //System.out.println("removing " + elements[0] + " size " + size);
-        T retVal = elements.get(0);
-        elements.set(0, elements.get(size-1));
-        size--;
-        int parentIndex = 0;
-        int childIndex = parentIndex + 1;
-        int selectedChild = 0;
-        int temp;
-        boolean flag = true;
-        do {
-            childIndex = 2 * parentIndex + 1;
-            selectedChild = -1;
-            //System.out.println("Child Index is "  + childIndex);
-            if((elements.get(parentIndex).compareTo(elements.get(childIndex)) > 0 || elements.get(parentIndex).compareTo(elements.get(childIndex+1)) > 0) && (childIndex +1 < size )) {
-                selectedChild = (elements.get(childIndex).compareTo(elements.get(childIndex + 1)))  < 0 ? childIndex: childIndex +1;
-                //System.out.println("Swapping: " + elements[parentIndex] + " " + elements[selectedChild]);
-                swap(elements, parentIndex, selectedChild);
-            }
-            parentIndex = selectedChild;
-//            System.out.println(" parent is now " + parentIndex + " " + elements[parentIndex]);
-        } while(selectedChild > -1);
+        //System.out.println("removing " + elements.get(0) + " size " + size);
+        T retVal = null;
+        if(elements != null && elements.size() > 0) {
+            retVal = elements.get(0);
+            elements.set(0, elements.get(elements.size()-1));
+            elements.remove(elements.size()-1);
+            int parentIndex = 0;
+            int childIndex;
+            int selectedChild;
+            boolean atBottom = false;
+            do {
+                childIndex = 2 * parentIndex + 1;
+                selectedChild = -1;
+                if (childIndex + 1 < elements.size()) {
+                    if(((elements.get(parentIndex).compareTo(elements.get(childIndex)) > 0 ) || (elements.get(parentIndex).compareTo(elements.get(childIndex+1)) > 0))) {
+                        selectedChild = (elements.get(childIndex).compareTo(elements.get(childIndex + 1)))  < 0 ? childIndex: childIndex +1;
+                        swap(elements, parentIndex, selectedChild);
+                    }
+                } else if (childIndex < elements.size()) {
+                    if(elements.get(parentIndex).compareTo(elements.get(childIndex)) > 0) {
+                        swap(elements, parentIndex, childIndex);
+                    }
+                }
+                parentIndex = selectedChild;
+    //            System.out.println(" parent is now " + parentIndex + " " + elements[parentIndex]);
+            } while(selectedChild > -1);
+        }
         return retVal;
     }
     public void printLevelOrderTraversal() {
