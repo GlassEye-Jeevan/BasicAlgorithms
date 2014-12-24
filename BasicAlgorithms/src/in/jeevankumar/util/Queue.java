@@ -15,54 +15,16 @@
  */
 package in.jeevankumar.util;
 
-import java.util.List;
-
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Queue<T> {
-    private LinkedListNode<T> head;
-    private LinkedListNode<T> tail;
-    public Queue() {
-        //myList = new LinkedListNode<T>();
-    }
+public interface Queue<T> {
+
+    void add(T element);
+
+    T getNext();
+
+    boolean hasNext();
     
-    public void add(T element) {
-        if (head == null) {
-            head = new LinkedListNode(element);
-            tail = head;
-        } else {
-            LinkedListNode lastElement = tail;
-            tail = new LinkedListNode(element);
-            lastElement.setNext(tail);
-        }
-    }
-    
-    public T getNext() {
-        T retVal;
-        if (head == null) {
-            retVal = null;
-        } else {
-            retVal = head.getInformation();
-            head = head.getNext();
-        }
-        return retVal;
-    }
-    
-    public boolean hasNext() {
-        boolean retVal = false;
-        if (head != null) {
-            retVal = true;
-        }
-        return retVal;
-    }
-    
-    private LinkedListNode getLastElement(LinkedListNode<T> myList) {
-        LinkedListNode start = myList;
-        while (start.getNext()!=null) {
-            start = start.getNext();
-        }
-        return start;
-    }
 }

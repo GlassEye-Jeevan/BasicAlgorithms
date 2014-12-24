@@ -12,7 +12,7 @@ public class Graph {
         nodes = n;
         graph = new Node[nodes];
         for(int i = 0; i < nodes; i++) {
-            graph[i] = new Node();
+            graph[i] = new Node(i);
         }
     }
     
@@ -25,7 +25,7 @@ public class Graph {
             System.out.format("%3d :", i);
             Edge currentEdge = graph[i].firstEdge;
             while(currentEdge != null) {
-                System.out.print("[" + currentEdge.nodeNum + ", " + currentEdge.edgeWeight + "] ");
+                System.out.print("[" + currentEdge.nodeNum + ", " + currentEdge.weight + "] ");
                 currentEdge = currentEdge.nextEdge;
             }
             System.out.println("");

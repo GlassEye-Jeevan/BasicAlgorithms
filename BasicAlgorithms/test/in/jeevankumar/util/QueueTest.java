@@ -39,7 +39,7 @@ public class QueueTest extends TestCase {
     
     public void testAdd() {
         Random rand = new Random();
-        Queue<Integer> newQ = new Queue<Integer>();
+        QueueImpl<Integer> newQ = new QueueImpl<Integer>();
         int testInt = rand.nextInt();
         newQ.add(testInt);
         
@@ -61,7 +61,7 @@ public class QueueTest extends TestCase {
     
     public void testGetNext() {
         Random rand = new Random();
-        Queue<Integer> newQ = new Queue<Integer>();
+        QueueImpl<Integer> newQ = new QueueImpl<Integer>();
         assertNull(newQ.getNext());
         int testInt = rand.nextInt();
         newQ.add(testInt);

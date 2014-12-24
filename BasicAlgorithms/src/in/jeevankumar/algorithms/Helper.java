@@ -18,8 +18,8 @@ package in.jeevankumar.algorithms;
 import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.algorithms.config.Constants;
 import in.jeevankumar.util.LinkedListNode;
-import in.jeevankumar.util.Queue;
-import in.jeevankumar.util.Tree;
+import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.TreeImpl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilterReader;
@@ -121,7 +121,7 @@ public class Helper {
      */    
     public static BinaryTree<Integer> setUpBinaryTree(int size, int bound, boolean randomNumbering) {
         Random rand = new Random();
-        Queue<BinaryTree> parentQueue = new Queue<BinaryTree>();
+        QueueImpl<BinaryTree> parentQueue = new QueueImpl<BinaryTree>();
         BinaryTree parentWithOneChild = null; 
         BinaryTree head = null;
         BinaryTree current;
@@ -133,7 +133,7 @@ public class Helper {
         for (int i = 0; i < size; i++) {
             int value = randomNumbering?rand.nextInt(bound):i+1;
             current = new BinaryTree<Integer>(value);
-            //current = new Tree<Integer>(i+1);
+            //current = new TreeImpl<Integer>(i+1);
             parentQueue.add(current);
             if (head == null) {
                 head = current;

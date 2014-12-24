@@ -18,12 +18,16 @@ package in.jeevankumar.algorithms;
 import in.jeevankumar.util.GraphNode;
 import in.jeevankumar.util.IntMaxHeap;
 import in.jeevankumar.util.LinkedListNode;
-import in.jeevankumar.util.Queue;
+import in.jeevankumar.util.MinHeap;
+import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.wip.Edge;
 import in.jeevankumar.util.wip.Graph;
+import in.jeevankumar.util.wip.Node;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
@@ -70,6 +74,8 @@ public class GraphProblemSolver {
             case "Djikstra":
                 Graph graph = readGraph(args[1], false);
                 graph.printGraph();
+                int[] distance;
+                distance = djikstra(graph,0);
                 break;
             default:
                 System.out.println("Usage: java GraphProblemSolver "
@@ -142,7 +148,7 @@ public class GraphProblemSolver {
     
     private void breadthFirstTraversal(GraphNode<Integer> node, boolean[] visited) {
         if(node != null) {
-            Queue<GraphNode> parentQ = new Queue<GraphNode>();
+            QueueImpl<GraphNode> parentQ = new QueueImpl<GraphNode>();
             
             parentQ.add(node);
             GraphNode<Integer> currentNode = node;
@@ -174,7 +180,7 @@ public class GraphProblemSolver {
     }
     
     private int[] unweightedShortestPath(GraphNode<Integer> sourceNode, int noOfNodes, int sourceNodeIndex) {
-        Queue<GraphNode<Integer>> nodeQueue = new Queue<GraphNode<Integer>>();
+        QueueImpl<GraphNode<Integer>> nodeQueue = new QueueImpl<GraphNode<Integer>>();
         nodeQueue.add(sourceNode);
         int[] distance = new int[noOfNodes];
         int[] path = new int[noOfNodes];
@@ -234,5 +240,39 @@ public class GraphProblemSolver {
     
     private static void err(int code) {
       System.exit(code);
+    }
+
+    private int[] djikstra(Graph graph, int source) {
+        
+        PriorityQueue<Node> nodeHeap = new PriorityQueue<>();
+        nodeHeap.add(graph.graph[source]);
+        while(!nodeHeap.isEmpty()) {
+            Node fromNode = nodeHeap.poll();
+            System.out.print(" From Node " + fromNode.toString());
+            Edge edge = fromNode.firstEdge;
+            while(edge!=null) {
+                Node currentNode = graph.graph[edge.nodeNum];
+                int weight = edge.weight;
+                int distanceThroughfromNode = fromNode.minDistance + weight;
+                
+                if(distanceThroughfromNode < currentNode.minDistance) {
+                    
+                    nodeHeap.remove(currentNode);
+                    currentNode.minDistance = distanceThroughfromNode;
+                    currentNode.previous = fromNode;
+                    nodeHeap.add(currentNode);
+                }
+                edge = edge.nextEdge;
+            }
+            System.out.println("");
+        }
+        printDjikstraOutput(graph);
+        return null;
+    }
+    
+    private void printDjikstraOutput(Graph graph) {
+        for(int i = 0; i < graph.graph.length; i++) {
+            System.out.println("Node " + i + " min " + graph.graph[i].minDistance + " prev " + graph.graph[i].previous);
+        }
     }
 }

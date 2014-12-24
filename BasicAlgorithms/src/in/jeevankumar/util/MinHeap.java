@@ -76,8 +76,13 @@ public class MinHeap<T extends Comparable> {
                 childIndex = 2 * parentIndex + 1;
                 selectedChild = -1;
                 if (childIndex + 1 < elements.size()) {
-                    if(((elements.get(parentIndex).compareTo(elements.get(childIndex)) > 0 ) || (elements.get(parentIndex).compareTo(elements.get(childIndex+1)) > 0))) {
-                        selectedChild = (elements.get(childIndex).compareTo(elements.get(childIndex + 1)))  < 0 ? childIndex: childIndex +1;
+                    T parent = elements.get(parentIndex); 
+                    T leftChild = elements.get(childIndex);
+                    T rightChild = elements.get(childIndex+1);
+                    
+                    if(((parent.compareTo(leftChild) > 0 ) 
+                            || (parent.compareTo(rightChild) > 0))) {
+                        selectedChild = (leftChild.compareTo(rightChild))  < 0 ? childIndex: childIndex +1;
                         swap(elements, parentIndex, selectedChild);
                     }
                 } else if (childIndex < elements.size()) {
@@ -108,5 +113,9 @@ public class MinHeap<T extends Comparable> {
      */
     private void setElements(ArrayList<T> elements) {
         this.elements = elements;
+    }
+    
+    public boolean isEmpty() {
+        return elements.isEmpty();
     }
 }

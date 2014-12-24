@@ -21,5 +21,5 @@ package in.jeevankumar.algorithms.config;
  */
 public interface Constants {
     public final int BOUND = 100;
-    public final String NEWLINE = "\n";
+    public final String NEWLINE = "\n"; 
 }

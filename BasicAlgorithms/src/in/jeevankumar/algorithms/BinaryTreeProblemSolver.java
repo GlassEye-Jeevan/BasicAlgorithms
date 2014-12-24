@@ -17,8 +17,8 @@ package in.jeevankumar.algorithms;
 
 import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.algorithms.config.Constants;
-import in.jeevankumar.util.Queue;
-import in.jeevankumar.util.Tree;
+import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.TreeImpl;
 
 /**
  *
@@ -31,7 +31,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
     }
     
     public void run() {
-        //Tree<T> treeRoot = (Tree<T>) Helper.setUpBinaryTree((int)(Math.pow(2.0, 5) - 1.0 ), Constants.BOUND, false);
+        //Tree<T> treeRoot = (TreeImpl<T>) Helper.setUpBinaryTree((int)(Math.pow(2.0, 5) - 1.0 ), Constants.BOUND, false);
         BinaryTree<Integer> treeRoot = Helper.setUpBinaryTree((int)(8 ), Constants.BOUND, false);
         /*preOrderTraversal(treeRoot);
         System.out.println();
@@ -41,7 +41,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
         
         levelOrderTraversal(treeRoot);*/
         //System.out.println("Max Element:    " + findMaxElement(treeRoot));
-        //System.out.println("Height Of Tree: " + heightOfBinaryTree(treeRoot));
+        //System.out.println("Height Of TreeImpl: " + heightOfBinaryTree(treeRoot));
         //System.out.println("Deepest Node:   " + deepestNodeInBinaryTree(treeRoot));
         int value1 = 8;
         int value2 = 5;
@@ -82,7 +82,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
     }
     
     private void levelOrderTraversal(BinaryTree root) {
-        Queue<BinaryTree> nodeQueue = new Queue<BinaryTree>();
+        QueueImpl<BinaryTree> nodeQueue = new QueueImpl<BinaryTree>();
         BinaryTree<T> currentNode = null;
         System.out.println("");
         if(root!=null) {
@@ -111,7 +111,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @return 
      */
     private T findMaxElement(BinaryTree<T> root) {
-        Queue<BinaryTree> nodeQueue = new Queue<BinaryTree>();
+        QueueImpl<BinaryTree> nodeQueue = new QueueImpl<BinaryTree>();
         BinaryTree<T> currentNode = null;
         T retVal = null;
         //System.out.println("");
@@ -148,7 +148,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @return  
      */
     private BinaryTree<T> searchElement(BinaryTree<T> root, int nodeVal) {
-        Queue<BinaryTree> nodeQueue = new Queue<BinaryTree>();
+        QueueImpl<BinaryTree> nodeQueue = new QueueImpl<BinaryTree>();
         BinaryTree<T> currentNode = null;
         BinaryTree<T> retVal = null;
         //System.out.println("");
@@ -200,7 +200,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
     }
     
     /**
-     * This function returns the deepest node in a Binary Tree. The logic
+     * This function returns the deepest node in a Binary TreeImpl. The logic
      * simply picks the last node added to the queue in a level order 
      * traversal.
      * @param root
@@ -210,7 +210,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
         T retVal = null;
         BinaryTree<T> currentNode = null;
         if (root!=null) {
-            Queue<BinaryTree> parentQ = new Queue<BinaryTree>();
+            QueueImpl<BinaryTree> parentQ = new QueueImpl<BinaryTree>();
             parentQ.add(root);
             //currentNode = root;
             do {

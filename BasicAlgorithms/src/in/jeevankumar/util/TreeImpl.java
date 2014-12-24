@@ -22,14 +22,14 @@ import java.util.List;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Tree<T extends Comparable> {
+public class TreeImpl<T extends Comparable> {
     private T info;
-    private List<Tree> children;
+    private List<TreeImpl> children;
 
     
-    public Tree(T information) {
+    public TreeImpl(T information) {
         this.info = information;
-        children = new ArrayList<Tree>();
+        children = new ArrayList<TreeImpl>();
     }
 
     /**
@@ -39,7 +39,7 @@ public class Tree<T extends Comparable> {
         return info;
     }
     
-    public void addChild(Tree<Integer> child) {
+    public void addChild(TreeImpl<Integer> child) {
         //System.out.println(this.info + "Added Child " + child.getInfo());
         this.children.add(child);
     }
@@ -48,8 +48,8 @@ public class Tree<T extends Comparable> {
         return children.size();
     }
     
-    public Tree getChild(int index) {
-        Tree<T> retVal = null;
+    public TreeImpl getChild(int index) {
+        TreeImpl<T> retVal = null;
         try {
             retVal = this.children.get(index);
         } catch (IndexOutOfBoundsException ex) {
@@ -59,7 +59,7 @@ public class Tree<T extends Comparable> {
         return retVal;
     }
     
-    public void setChild(int index, Tree element ) {
+    public void setChild(int index, TreeImpl element ) {
         if (element == null )
             return;
         for (int i = 0; i <= index; i++) {
@@ -77,12 +77,12 @@ public class Tree<T extends Comparable> {
         
     }
     
-    public List<Tree> getChildren() {
+    public List<TreeImpl> getChildren() {
         return children;
     }
 
     public void resetChildren() {
-        this.children = new ArrayList<Tree>();
+        this.children = new ArrayList<TreeImpl>();
     }
     
 }

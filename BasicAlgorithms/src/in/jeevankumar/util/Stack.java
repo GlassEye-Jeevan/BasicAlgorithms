@@ -19,31 +19,12 @@ package in.jeevankumar.util;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Stack<T> {
-    private DoublyLinkedList<T> first;
-    private DoublyLinkedList<T> last;
+public interface Stack<T> {
+
+    T pop();
+
+    void push(T element);
     
+    boolean isEmpty();
     
-    public Stack() {
-        //myList = new LinkedList<T>();
-    }
-    public T pop() {
-        DoublyLinkedList<T> temp = last;
-        last = last.getPrev();
-        last.setNext(null);
-        temp.setPrev(null);
-        return temp.getInformation();
-    }
-    
-    public void push(T element) {
-        if (first == null) {
-            first = new DoublyLinkedList<T>(element);
-            last = first;
-        } else {
-            DoublyLinkedList newNode = new DoublyLinkedList<T> (element);
-            last.setNext(newNode);
-            newNode.setPrev(last);
-            last = newNode;
-        }
-    }
 }

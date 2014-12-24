@@ -9,16 +9,16 @@ package in.jeevankumar.util.wip;
 public class Edge implements Comparable{
     public int nodeNum;
     public Edge nextEdge;
-    public int edgeWeight;
+    public int weight;
     public Edge(int num, Edge e, int weight) {
         nodeNum = num;
         nextEdge = e;
-        edgeWeight = weight;
+        this.weight = weight;
     }
 
     @Override
     public int compareTo(Object o) {
         Edge otherEdge = (Edge) o;
-        return this.edgeWeight - otherEdge.edgeWeight;
+        return Integer.compare(this.weight, otherEdge.weight);
     }
 }

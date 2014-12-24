@@ -16,8 +16,8 @@
 package in.jeevankumar.algorithms;
 
 import in.jeevankumar.algorithms.config.Constants;
-import in.jeevankumar.util.Queue;
-import in.jeevankumar.util.Tree;
+import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.TreeImpl;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -34,7 +34,7 @@ public class TreeProblemSolver<T extends Comparable> {
     public void run(String[] args) {
         String command = args[0];
         String parents = args[1];
-        Tree<Integer> anotherRoot = this.createTree(parents);
+        TreeImpl<Integer> anotherRoot = this.createTree(parents);
         String[] algoList = { 
             "LevelOrderTraversal",
             "MaxElement",
@@ -42,16 +42,16 @@ public class TreeProblemSolver<T extends Comparable> {
         };
         switch(command) {
             case "LevelOrderTraversal":
-                levelOrderTraversal((Tree<T>) anotherRoot);
+                levelOrderTraversal((TreeImpl<T>) anotherRoot);
                 break;
             case "MaxElement":
-                findMaxElement((Tree<T>) anotherRoot);
+                findMaxElement((TreeImpl<T>) anotherRoot);
                 break;
             case "FindElement":
-                searchElement((Tree<T>) anotherRoot, Integer.parseInt(args[2]));
+                searchElement((TreeImpl<T>) anotherRoot, Integer.parseInt(args[2]));
                 break;
             case "DeepestNode":
-                deepestNodeInATree((Tree<T>) anotherRoot);
+                deepestNodeInATree((TreeImpl<T>) anotherRoot);
                 break;
             default:
                 System.out.println("Unrecognized Command \n "
@@ -62,13 +62,13 @@ public class TreeProblemSolver<T extends Comparable> {
         
     }
     
-    private Tree<Integer> createTree(int[] nodes, int[][] edges) {
-        HashMap<Integer, Tree<Integer>> nodeMap = new HashMap<>();
-        Tree<Integer> root = null;
-        Tree<Integer> temp;
+    private TreeImpl<Integer> createTree(int[] nodes, int[][] edges) {
+        HashMap<Integer, TreeImpl<Integer>> nodeMap = new HashMap<>();
+        TreeImpl<Integer> root = null;
+        TreeImpl<Integer> temp;
             
         for(int i = 0; i<nodes.length; i++) {
-            temp = new Tree<Integer>(nodes[i]);
+            temp = new TreeImpl<Integer>(nodes[i]);
             nodeMap.put(new Integer(nodes[i]), temp);
             if (i==0) {
                 root = temp;
@@ -76,7 +76,7 @@ public class TreeProblemSolver<T extends Comparable> {
         }
         
         for(int i = 0; i<edges.length; i++) {
-            Tree<Integer> node = nodeMap.get( new Integer(edges[i][0]));
+            TreeImpl<Integer> node = nodeMap.get( new Integer(edges[i][0]));
             node.addChild(nodeMap.get(new Integer(edges[i][1])));
             //System.out.println(node.getInfo() + " Adding Child " + edges[i][1]);
         }
@@ -91,12 +91,12 @@ public class TreeProblemSolver<T extends Comparable> {
      * @param parentChildArray
      * @return 
      */
-    private Tree<Integer> createTree(int[] parentChildArray) {
-        HashMap<Integer, Tree<Integer>> nodeMap = new HashMap<>();
-        Tree<Integer> root = null;
-        Tree<Integer> temp;
+    private TreeImpl<Integer> createTree(int[] parentChildArray) {
+        HashMap<Integer, TreeImpl<Integer>> nodeMap = new HashMap<>();
+        TreeImpl<Integer> root = null;
+        TreeImpl<Integer> temp;
         for (int i = 0; i < parentChildArray.length; i++) {
-            temp = new Tree<Integer>(i);
+            temp = new TreeImpl<Integer>(i);
             nodeMap.put(i, temp);
             if (i==0) {
                 root = temp;
@@ -118,7 +118,7 @@ public class TreeProblemSolver<T extends Comparable> {
      * @param input
      * @return 
      */
-    private Tree<Integer> createTree(String input) {
+    private TreeImpl<Integer> createTree(String input) {
         String split = ",";
         String[] inputs = input.split(split);
         int[] parents = new int[inputs.length];
@@ -128,16 +128,16 @@ public class TreeProblemSolver<T extends Comparable> {
         return createTree(parents);
     }
     
-    private void levelOrderTraversal(Tree<T> root) {
-        Queue<Tree> nodeQueue = new Queue<Tree>();
-        Tree<T> currentNode = null;
+    private void levelOrderTraversal(TreeImpl<T> root) {
+        QueueImpl<TreeImpl> nodeQueue = new QueueImpl<TreeImpl>();
+        TreeImpl<T> currentNode = null;
         if(root!=null) {
             nodeQueue.add(root);
             currentNode = root;
             do {
                 currentNode = nodeQueue.getNext();
                 System.out.print(currentNode.getInfo() + " ");
-                for (Tree<T> child : currentNode.getChildren()) {
+                for (TreeImpl<T> child : currentNode.getChildren()) {
                     nodeQueue.add(child);
                 }
             } while(nodeQueue.hasNext());
@@ -151,9 +151,9 @@ public class TreeProblemSolver<T extends Comparable> {
      * @param root
      * @return 
      */
-    private T findMaxElement(Tree<T> root) {
-        Queue<Tree> nodeQueue = new Queue<Tree>();
-        Tree<T> currentNode = null;
+    private T findMaxElement(TreeImpl<T> root) {
+        QueueImpl<TreeImpl> nodeQueue = new QueueImpl<TreeImpl>();
+        TreeImpl<T> currentNode = null;
         T retVal = null;
         if(root!=null) {
             nodeQueue.add(root);
@@ -165,7 +165,7 @@ public class TreeProblemSolver<T extends Comparable> {
                 if(info.compareTo(retVal) > 0) {
                     retVal = currentNode.getInfo();
                 }
-                for (Tree<Integer> child : currentNode.getChildren()) {
+                for (TreeImpl<Integer> child : currentNode.getChildren()) {
                     nodeQueue.add(child);
                 }
             } while(nodeQueue.hasNext());
@@ -181,10 +181,10 @@ public class TreeProblemSolver<T extends Comparable> {
      * @param nodeVal
      * @return  
      */
-    private Tree<T> searchElement(Tree<T> root, int nodeVal) {
-        Queue<Tree> nodeQueue = new Queue<Tree>();
-        Tree<T> currentNode = null;
-        Tree<T> retVal = null;
+    private TreeImpl<T> searchElement(TreeImpl<T> root, int nodeVal) {
+        QueueImpl<TreeImpl> nodeQueue = new QueueImpl<TreeImpl>();
+        TreeImpl<T> currentNode = null;
+        TreeImpl<T> retVal = null;
         if(root!=null) {
             nodeQueue.add(root);
             currentNode = root;
@@ -198,7 +198,7 @@ public class TreeProblemSolver<T extends Comparable> {
                     break;
                 }
                 //System.out.print(currentNode.getInfo() + " x  ");
-                for (Tree<Integer> child : currentNode.getChildren()) {
+                for (TreeImpl<Integer> child : currentNode.getChildren()) {
                     nodeQueue.add(child);
                 }
             } while(nodeQueue.hasNext());
@@ -211,12 +211,12 @@ public class TreeProblemSolver<T extends Comparable> {
      * @param node
      * @return 
      */
-    private int heightOfTree(Tree<T> node) {
+    private int heightOfTree(TreeImpl<T> node) {
         int retVal = 0;
         if(node!=null) {
             int maxHeight = -1;
             int currentHeight;
-            for (Tree child : node.getChildren()) {
+            for (TreeImpl child : node.getChildren()) {
                 currentHeight = 1 + heightOfTree(child);
                 if (currentHeight > maxHeight) {
                     currentHeight = maxHeight;
@@ -229,17 +229,17 @@ public class TreeProblemSolver<T extends Comparable> {
     }
     
     /**
-     * This function returns the deepest node in a Tree. The logic
+     * This function returns the deepest node in a TreeImpl. The logic
      * simply picks the last node added to the queue in a level order 
      * traversal.
      * @param root
      * @return 
      */
-    private T deepestNodeInATree(Tree<T> root) {
+    private T deepestNodeInATree(TreeImpl<T> root) {
         T retVal = null;
-        Tree<T> currentNode = null;
+        TreeImpl<T> currentNode = null;
         if (root!=null) {
-            Queue<Tree> parentQ = new Queue<Tree>();
+            QueueImpl<TreeImpl> parentQ = new QueueImpl<TreeImpl>();
             parentQ.add(root);
             //currentNode = root;
             do {
