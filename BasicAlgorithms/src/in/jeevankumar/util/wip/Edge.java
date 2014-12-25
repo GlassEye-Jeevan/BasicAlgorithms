@@ -6,11 +6,11 @@ package in.jeevankumar.util.wip;
  * From UTSA, http://www.cs.utsa.edu/~wagner/CS3343/newgraph/graphrep.html
  * @author  Donald Knuth
  */
-public class Edge implements Comparable{
-    public int nodeNum;
-    public Edge nextEdge;
-    public int weight;
-    public Edge(int num, Edge e, int weight) {
+public class Edge<T extends Comparable> implements Comparable{
+    private int nodeNum;
+    private Edge nextEdge;
+    private T weight;
+    public Edge(int num, Edge e, T weight) {
         nodeNum = num;
         nextEdge = e;
         this.weight = weight;
@@ -19,6 +19,34 @@ public class Edge implements Comparable{
     @Override
     public int compareTo(Object o) {
         Edge otherEdge = (Edge) o;
-        return Integer.compare(this.weight, otherEdge.weight);
+        return this.getWeight().compareTo(otherEdge.getWeight());
+    }
+
+    /**
+     * @return the weight
+     */
+    public T getWeight() {
+        return weight;
+    }
+
+    /**
+     * @return the nextEdge
+     */
+    public Edge getNextEdge() {
+        return nextEdge;
+    }
+
+    /**
+     * @param nextEdge the nextEdge to set
+     */
+    public void setNextEdge(Edge nextEdge) {
+        this.nextEdge = nextEdge;
+    }
+
+    /**
+     * @return the nodeNum
+     */
+    public int getNodeNum() {
+        return nodeNum;
     }
 }

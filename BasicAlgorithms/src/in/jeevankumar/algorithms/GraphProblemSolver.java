@@ -218,7 +218,13 @@ public class GraphProblemSolver {
         if (sc.hasNextInt())
             nodes = sc.nextInt();
         else err(2);
-        Graph graph = new Graph(nodes);
+        int[] intValues = new int[nodes];
+        Integer[] integerValues = new Integer[nodes];
+        for (int i = 0; i < nodes; i++) {
+            intValues[i] = i;
+            integerValues[i] = new Integer(i);
+        }
+        Graph<Integer> graph = new Graph<Integer>(intValues, integerValues);
         // get vertices = num of vertices
       
         while (sc.hasNextInt()) {
@@ -242,27 +248,30 @@ public class GraphProblemSolver {
       System.exit(code);
     }
 
-    private int[] djikstra(Graph graph, int source) {
+    private int[] djikstra(Graph<Integer> graph, int source) {
         
         PriorityQueue<Node> nodeHeap = new PriorityQueue<>();
-        nodeHeap.add(graph.graph[source]);
+        Node<Integer> sourceNode = graph.getGraph()[source];
+        sourceNode.setMinDistance(0);
+        nodeHeap.add(sourceNode);
+        
         while(!nodeHeap.isEmpty()) {
             Node fromNode = nodeHeap.poll();
             System.out.print(" From Node " + fromNode.toString());
-            Edge edge = fromNode.firstEdge;
+            Edge<Integer> edge = fromNode.getFirstEdge();
             while(edge!=null) {
-                Node currentNode = graph.graph[edge.nodeNum];
-                int weight = edge.weight;
-                int distanceThroughfromNode = fromNode.minDistance + weight;
+                Node currentNode = graph.getGraph()[edge.getNodeNum()];
+                int weight = edge.getWeight();
+                int distanceThroughfromNode = fromNode.getMinDistance() + weight;
                 
-                if(distanceThroughfromNode < currentNode.minDistance) {
+                if(distanceThroughfromNode < currentNode.getMinDistance()) {
                     
                     nodeHeap.remove(currentNode);
-                    currentNode.minDistance = distanceThroughfromNode;
+                    currentNode.setMinDistance(distanceThroughfromNode);
                     currentNode.previous = fromNode;
                     nodeHeap.add(currentNode);
                 }
-                edge = edge.nextEdge;
+                edge = edge.getNextEdge();
             }
             System.out.println("");
         }
@@ -271,8 +280,8 @@ public class GraphProblemSolver {
     }
     
     private void printDjikstraOutput(Graph graph) {
-        for(int i = 0; i < graph.graph.length; i++) {
-            System.out.println("Node " + i + " min " + graph.graph[i].minDistance + " prev " + graph.graph[i].previous);
+        for(int i = 0; i < graph.getGraph().length; i++) {
+            System.out.println("Node " + i + " min " + graph.getGraph()[i].getMinDistance() + " prev " + graph.getGraph()[i].previous);
         }
     }
 }

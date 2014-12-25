@@ -26,7 +26,14 @@ public class GraphMain {
       if (sc.hasNextInt())
          nodes = sc.nextInt();
       else err(2);
-      Graph graph = new Graph(nodes);
+      int[] intValues = new int[nodes];
+      Integer[] integerValues = new Integer[nodes];
+      for (int i = 0; i < nodes; i++) {
+          intValues[i] = i;
+          integerValues[i] = new Integer(i);
+      }
+      Graph<Integer> graph = new Graph<Integer>(intValues, integerValues);
+      
       // get vertices = num of vertices
       while (sc.hasNextInt()) {
          num1 = sc.nextInt();
