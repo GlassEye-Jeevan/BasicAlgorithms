@@ -13,20 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.jeevankumar.util;
+package in.jeevankumar.algorithms;
 
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public interface Queue<T> {
-
-    public void add(T element);
-
-    public T getNext();
-
-    public boolean hasNext();
-    
-    public boolean contains(T element);
-    
+public class Main {
+    public static void main(String[] args) {
+        
+    }
 }

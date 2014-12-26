@@ -68,4 +68,18 @@ public class QueueImpl<T> implements Queue<T> {
         }
         return start;
     }
+
+    @Override
+    public boolean contains(T element) {
+        LinkedListNode<T> pointer = head;
+        boolean retVal = false;
+        while(pointer != null) {
+            if(pointer.getInformation().equals(this)) {
+                retVal = true;
+                break;
+            }
+            pointer = pointer.getNext();
+        }
+        return retVal;
+    }
 }

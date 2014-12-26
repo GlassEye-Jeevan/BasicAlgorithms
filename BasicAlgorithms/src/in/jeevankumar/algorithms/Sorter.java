@@ -25,22 +25,25 @@ public class Sorter {
     
     public static void main(String[] args) {
         Sorter sorter = new Sorter();
-        if (args.length < 2) {
-            System.out.println("Usage: java Sorter BubbleSort 11,23,1,2,4,-6,8,43,73,12,0,-23");
-        } else {
-            sorter.run(args);
-        }
+        sorter.run(args);
     }
     
     public void run(String[] args) {
         
         int[] unsorted = Helper.stringToIntArray(args[1]);
+        int maxElement = 0;
+        if (args.length > 2) {
+            maxElement = Integer.parseInt(args[2]);
+        }
         int[] sorted = null;
         System.out.println(Arrays.toString(unsorted));
         
         switch(args[0]) {
                 case "BubbleSort":
                     sorted = this.bubbleSort(unsorted);
+                    break;
+                case "ImprovedBubbleSort":
+                    sorted = this.improvedBubbleSort(unsorted);
                     break;
                 case "MergeSort":
                     sorted = this.mergeSort(unsorted);
@@ -50,8 +53,22 @@ public class Sorter {
                     break;    
                 case "SelectionSort":
                     sorted = this.selectionSort(unsorted);
-                    break;    
+                    break;
+                case "InsertionSort":
+                    sorted = this.insertionSort(unsorted);
+                    break;
+                case "CountingNonRepeatingSort":
+                    sorted = this.countingNonRepeatingSort(unsorted, maxElement);
+                    break;
+                
+                case "CountingSort":
+                    sorted = this.countingSort(unsorted, maxElement);
+                    break;
+                case "BucketSort":
+                    sorted = this.bucketSort(unsorted, maxElement);
+                    break;
                 default:
+                zdefault:
                     System.out.println("Sort algorithm unrecognized: " + args[0]);
             }
          
@@ -67,6 +84,24 @@ public class Sorter {
                     int temp = unsorted[j-1];
                     unsorted[j-1] = unsorted[j];
                     unsorted[j] = temp;
+                }
+            }
+        }
+        return unsorted;
+    }
+    public int[] improvedBubbleSort(int[] unsorted) {
+        boolean swapFlag = true;
+        int swapCount = 0;
+        for (int i = 0 ; i < unsorted.length && swapFlag; i++) {
+            System.out.println(Arrays.toString(unsorted));
+            swapFlag = false;
+            for (int j = 1; j < unsorted.length - i; j++) {
+                if (unsorted[j-1] > unsorted[j]) {
+                    int temp = unsorted[j-1];
+                    unsorted[j-1] = unsorted[j];
+                    unsorted[j] = temp;
+                    swapFlag = true;
+                    //System.out.println("Swap Count " + ++swapCount);
                 }
             }
         }
@@ -164,7 +199,7 @@ public class Sorter {
         return i;
     }
     
-    private int[] selectionSort(int[] unsorted) {
+    public int[] selectionSort(int[] unsorted) {
         int min, temp;
         for (int i = 0; i < unsorted.length; i++) {
             min = i;
@@ -178,4 +213,85 @@ public class Sorter {
         }
         return unsorted;
     }
+    
+    public int[] insertionSort(int[] unsorted) {
+        int var;
+        for(int i = 2; i < unsorted.length ; i++) {
+            System.out.println(Arrays.toString(unsorted));
+            var = unsorted[i];
+            int j;
+            for (j = i; j >= 1 && unsorted[j-1] > var; j--) {
+                unsorted[j] = unsorted[j-1];
+            }
+            unsorted[j] = var;
+        }
+        return unsorted;
+    }
+    
+    public int[] countingNonRepeatingSort(int[] unsorted, int maxElement) {
+        System.out.println("Max " + maxElement);
+        int minElement = 0;
+        int[] temp = new int[maxElement + 1];
+        int[] result = new int[unsorted.length];
+        Helper.setAll(temp, -1);
+        result = Helper.setAll(result, -1);
+        
+        
+        for (int i = 0; i < unsorted.length; i++) {
+            temp[unsorted[i]] = temp[unsorted[i]] + 2;
+            System.out.println(" element " + unsorted[i]);
+        }
+        //int j;
+        for (int i = 0,j = 0; i< temp.length; i++) {
+            if(temp[i] == 1) {
+                result[j++] = i;
+            }
+        }
+        
+        return result;
+    }
+    
+    public int[] countingSort(int[] unsorted, int maxElement) {
+        int[] temp = new int[maxElement + 1];
+        int[] result = new int[unsorted.length ];
+        Helper.setAll(result, -1);
+        
+        for(int i = 0; i < unsorted.length; i++) {
+            temp[unsorted[i]] = temp[unsorted[i]] +1;
+        }
+        //System.out.println(" temp " + Arrays.toString(temp));
+        for (int i = 1; i < temp.length; i++) {
+            temp[i] = temp[i] + temp[i-1];
+        }
+        
+        //System.out.println(" temp " + Arrays.toString(temp));
+        
+        for (int i = unsorted.length-1; i>=0; i--) {
+            System.out.println(Arrays.toString(result) );
+            int tempa = unsorted[i];
+            int tempb = temp[tempa];
+            //System.out.println("TempA " + tempa + " TempB " + (tempb-1));
+            result[tempb-1] = tempa;
+            temp[unsorted[i]] = temp[unsorted[i]] - 1;
+        }
+        return result;
+    }
+    
+    public int[] bucketSort(int[] unsorted, int maxElement) {
+        int[] buckets = new int[maxElement + 1];
+        Helper.setAll(buckets, 0);
+        
+        for (int i = 0; i < unsorted.length; i++) {
+            ++buckets[unsorted[i]];
+        }
+        
+        for(int i = 0, j = 0; j <= maxElement; j++) {
+            for(int k = buckets[j]; k > 0; --k) {
+                unsorted[i++] = j;
+            }
+        }
+        return unsorted;
+    }
+    
+    
 }
