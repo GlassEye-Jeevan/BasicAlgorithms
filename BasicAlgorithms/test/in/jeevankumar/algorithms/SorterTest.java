@@ -15,6 +15,8 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.algorithms.config.Constants;
+import java.util.Arrays;
 import java.util.Random;
 import junit.framework.TestCase;
 
@@ -22,8 +24,8 @@ import junit.framework.TestCase;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class SearcherTest extends TestCase {
-    public SearcherTest (String testName) {
+public class SorterTest extends TestCase {
+    public SorterTest (String testName) {
         super(testName);
     }
     
@@ -88,6 +90,44 @@ public class SearcherTest extends TestCase {
     private void assertArrayIsSorted(int[] apparentlySorted) {
         for (int i = 1; i < apparentlySorted.length; i++) {
             assertTrue(apparentlySorted[i] > apparentlySorted[i-1]);
+        }
+    }
+    
+    public void testInsertionSort() {
+        Random rand = new Random();
+        int limit = rand.nextInt(Constants.BOUND);
+        int[] input = new int[limit];
+        int[] copy = new int[limit];
+        
+        for(int i = 0; i < limit; i++) {
+            input[i] = rand.nextInt();
+            copy[i] = input[i];
+        }
+        
+        Arrays.sort(copy);
+        Sorter sorter = new Sorter();
+        input = sorter.insertionSort(input);
+        for(int i = 0; i < limit; i++) {
+            assertEquals(input[i], copy[i]);
+        }
+    }
+    
+    public void testHeapSort() {
+        Random rand = new Random();
+        int limit = rand.nextInt(Constants.BOUND);
+        int[] input = new int[limit];
+        int[] copy = new int[limit];
+        
+        for(int i = 0; i < limit; i++) {
+            input[i] = rand.nextInt();
+            copy[i] = input[i];
+        }
+        
+        Arrays.sort(copy);
+        Sorter sorter = new Sorter();
+        input = sorter.heapSort(input);
+        for(int i = 0; i < limit; i++) {
+            assertEquals(input[i], copy[i]);
         }
     }
 }

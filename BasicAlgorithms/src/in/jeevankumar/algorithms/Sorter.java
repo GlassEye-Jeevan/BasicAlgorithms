@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.util.MinHeap;
 import java.util.Arrays;
 
 /**
@@ -66,6 +67,10 @@ public class Sorter {
                     break;
                 case "BucketSort":
                     sorted = this.bucketSort(unsorted, maxElement);
+                    break;
+                
+                case "HeapSort":
+                    sorted = this.heapSort(unsorted);
                     break;
                 default:
                 zdefault:
@@ -216,14 +221,17 @@ public class Sorter {
     
     public int[] insertionSort(int[] unsorted) {
         int var;
-        for(int i = 2; i < unsorted.length ; i++) {
-            System.out.println(Arrays.toString(unsorted));
+        int j;
+            
+        for(int i = 1; i < unsorted.length ; i++) {
+            //System.out.println(Arrays.toString(unsorted));
             var = unsorted[i];
-            int j;
-            for (j = i; j >= 1 && unsorted[j-1] > var; j--) {
+            j = i;
+            for (; j > 0 && unsorted[j-1] > var; j--) {
                 unsorted[j] = unsorted[j-1];
             }
             unsorted[j] = var;
+            //System.out.println( " Moving " + var + " to " + j);
         }
         return unsorted;
     }
@@ -277,6 +285,14 @@ public class Sorter {
         return result;
     }
     
+    /**
+     * Bucket Sort assumes that the elements to be sorted are in a range between 
+     * 0 and maxElement. The logic simply counts that number of occurrences of 
+     * each element between 0 and maxElements and writes them into the output.
+     * @param unsorted
+     * @param maxElement
+     * @return 
+     */
     public int[] bucketSort(int[] unsorted, int maxElement) {
         int[] buckets = new int[maxElement + 1];
         Helper.setAll(buckets, 0);
@@ -291,6 +307,17 @@ public class Sorter {
             }
         }
         return unsorted;
+    }
+    
+    public int[] heapSort(int[] input) {
+        MinHeap<Integer> minHeap = new MinHeap<Integer>();
+        for(int i = 0; i < input.length; i++) {
+            minHeap.add(new Integer(input[i]));
+        }
+        for(int i = 0; i < input.length; i++) {
+            input[i] = minHeap.removeTop().intValue();
+        }
+        return input;
     }
     
     
