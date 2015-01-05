@@ -10,7 +10,7 @@ One reminder is that the repository is work in progress. Feel free to contribute
 Here is a complete index of the algorithms and data structures completed (as of 30 Dec 2014):
 
 1. Data Structures
-  * LinkedList
+  * <a href="http://en.wikipedia.org/wiki/Linked_list">LinkedList</a>
   * Doubly Linked List
   * Stack
   * Queue
