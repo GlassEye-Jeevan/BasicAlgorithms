@@ -1,7 +1,7 @@
-BasicAlgorithms
+BasicAlgorithms And Data Structures
 ===============
 
-A Repository of basic algorithms
+A Repository of basic algorithms and data structures. 
 
 We have created a Github repo full of basic algorithms that a data scientist should know. Knowledge of basic algorithms provide a good foundation to solve newer problems and it often helps not to reinvent the wheel. So, fork us. 
 
