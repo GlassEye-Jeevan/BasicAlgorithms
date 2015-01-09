@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Jeevan Kumar <mail@jeevankumar.in>.
+ * Copyright 2015 Jeevan Kumar <mail@jeevankumar.in>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.jeevankumar.algorithms;
+package in.jeevankumar.util;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Main {
-    public static void main(String[] args) {
-        Main main = new Main();
-        main.run(args);
-    }
-    public void run(String[] args) {
-        switch(args[0]) {
-            
-            case "help":
-            default:
-                System.out.println("java BasicAlgorithms <Algorithm Name> "
-                        + "<input 1> <input 2> ...");
-               
-        }
-    }
+public interface Heap<T extends Comparable> {
+
+    ArrayList<T> add(T element);
+
+    /**
+     * @return the elements
+     */
+    ArrayList<T> getElements();
+
+    boolean isEmpty();
+
+    void printLevelOrderTraversal();
+
+    T removeTop();
+    
 }

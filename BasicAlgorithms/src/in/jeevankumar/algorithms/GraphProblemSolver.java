@@ -16,11 +16,10 @@
 package in.jeevankumar.algorithms;
 
 import in.jeevankumar.util.GraphNode;
-import in.jeevankumar.util.IntMaxHeap;
 import in.jeevankumar.util.LinkedListNode;
 import in.jeevankumar.util.MinHeap;
 import in.jeevankumar.util.Queue;
-import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.DefaultQueue;
 import in.jeevankumar.util.wip.Edge;
 import in.jeevankumar.util.wip.Graph;
 import in.jeevankumar.util.wip.Node;
@@ -163,7 +162,7 @@ public class GraphProblemSolver {
     
     private void breadthFirstTraversal(GraphNode<Integer> node, boolean[] visited) {
         if(node != null) {
-            QueueImpl<GraphNode> parentQ = new QueueImpl<GraphNode>();
+            DefaultQueue<GraphNode> parentQ = new DefaultQueue<GraphNode>();
             
             parentQ.add(node);
             GraphNode<Integer> currentNode = node;
@@ -195,7 +194,7 @@ public class GraphProblemSolver {
     }
     
     private int[] unweightedShortestPath(GraphNode<Integer> sourceNode, int noOfNodes, int sourceNodeIndex) {
-        QueueImpl<GraphNode<Integer>> nodeQueue = new QueueImpl<GraphNode<Integer>>();
+        DefaultQueue<GraphNode<Integer>> nodeQueue = new DefaultQueue<GraphNode<Integer>>();
         nodeQueue.add(sourceNode);
         int[] distance = new int[noOfNodes];
         int[] path = new int[noOfNodes];
@@ -301,7 +300,7 @@ public class GraphProblemSolver {
     }
     
     private void bellmanFord(Graph graph, int source) {
-        Queue<Node<Integer>> nodeQueue = new QueueImpl<Node<Integer>>() {};
+        Queue<Node<Integer>> nodeQueue = new DefaultQueue<Node<Integer>>() {};
         Node<Integer> sourceNode = graph.getGraph()[source];
         
         sourceNode.setMinDistance(0);

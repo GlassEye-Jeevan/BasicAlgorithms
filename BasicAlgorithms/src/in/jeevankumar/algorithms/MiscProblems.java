@@ -15,8 +15,6 @@
  */
 package in.jeevankumar.algorithms;
 
-import in.jeevankumar.util.IntMinHeap;
-import in.jeevankumar.util.IntMaxHeap;
 import in.jeevankumar.util.MinHeap;
 import java.util.Arrays;
 
@@ -31,6 +29,7 @@ public class MiscProblems {
     }
     
     public void run(String[] args) {
+        int[] integers;
         switch(args[0]) {
             case "RotateMatrix":
                 int[][] input = readMatrix(args);
@@ -38,16 +37,6 @@ public class MiscProblems {
                 int[][] output = rotateMatrix(input);
                 printMatrix(output);
                 //java MiscProblems RotateMatrix 4x3 1,1,1 2,2,2 3,3,3 4,4,4
-                break;
-            case "AddToHeap":
-                int[] integers = Helper.stringToIntArray(args[1]);
-                System.out.println("Input " + Arrays.toString(integers));
-                IntMinHeap heap = addToHeap(integers);
-                heap.printLevelOrderTraversal();
-                System.out.print("Removing top " + heap.removeTop()+ " ");heap.printLevelOrderTraversal();
-                System.out.print("Removing top "+ heap.removeTop()+ " ");heap.printLevelOrderTraversal();
-                System.out.print("Removing top "+ heap.removeTop()+ " ");heap.printLevelOrderTraversal();
-                //java AddToHeap 40,15,20,13,8,22,100
                 break;
             case "GenericMinHeap":
                 String inputFileName = args[1];
@@ -85,13 +74,6 @@ public class MiscProblems {
         return inputMatrix;
     }
     
-    private IntMinHeap addToHeap(int[] inputs) {
-        IntMinHeap myHeap = new IntMinHeap();
-        for(int i = 0; i < inputs.length; i++) {
-            myHeap.add(inputs[i]);
-        }
-        return myHeap;
-    }
     
     private void printMatrix(int[][] input) {
         for(int i = 0; i<input.length; i++) {

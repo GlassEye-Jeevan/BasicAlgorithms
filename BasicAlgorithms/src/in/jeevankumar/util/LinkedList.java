@@ -19,14 +19,19 @@ package in.jeevankumar.util;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements List<T> {
     private LinkedListNode head;
     private LinkedListNode tail;
     private int size;        
     public LinkedList() {
         
     }
-    
+    /**
+     * This method returns true if there is at least one item in the list.
+     * 
+     * @return 
+     */
+    @Override
     public boolean hasNext() {
         boolean retVal = true;
         if(head == null) {
@@ -34,7 +39,12 @@ public class LinkedList<T> {
         }
         return retVal;
     }
-    
+    /**
+     * This method adds a node at the end of the List. 
+     * 
+     * @param information 
+     */
+    @Override
     public void add(T information) {
         LinkedListNode newNode = new LinkedListNode(information);
         
@@ -45,7 +55,12 @@ public class LinkedList<T> {
         tail = newNode;
         size++;
     }
-    
+    /**
+     * This method adds the new information node at the head of the list. 
+     * 
+     * @param information 
+     */
+    @Override
     public void addAtHead(T information) {
         LinkedListNode newNode = new LinkedListNode(information);
         if(head == null) {
@@ -56,7 +71,13 @@ public class LinkedList<T> {
         }
         size++;
     }
-    
+    /**
+     * This method adds the information node at the the given index.
+     * 
+     * @param information
+     * @param index 
+     */
+    @Override
     public void add(T information, int index) {
         if (index == 0) {
             this.addAtHead(information);
@@ -87,8 +108,10 @@ public class LinkedList<T> {
     }
 
     /**
+     * This method returns the size of the List. 
      * @return the size
      */
+    @Override
     public int getSize() {
         return size;
     }

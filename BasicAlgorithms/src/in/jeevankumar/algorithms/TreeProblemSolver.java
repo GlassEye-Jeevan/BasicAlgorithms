@@ -16,7 +16,7 @@
 package in.jeevankumar.algorithms;
 
 import in.jeevankumar.algorithms.config.Constants;
-import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.DefaultQueue;
 import in.jeevankumar.util.TreeImpl;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -129,7 +129,7 @@ public class TreeProblemSolver<T extends Comparable> {
     }
     
     private void levelOrderTraversal(TreeImpl<T> root) {
-        QueueImpl<TreeImpl> nodeQueue = new QueueImpl<TreeImpl>();
+        DefaultQueue<TreeImpl> nodeQueue = new DefaultQueue<TreeImpl>();
         TreeImpl<T> currentNode = null;
         if(root!=null) {
             nodeQueue.add(root);
@@ -152,7 +152,7 @@ public class TreeProblemSolver<T extends Comparable> {
      * @return 
      */
     private T findMaxElement(TreeImpl<T> root) {
-        QueueImpl<TreeImpl> nodeQueue = new QueueImpl<TreeImpl>();
+        DefaultQueue<TreeImpl> nodeQueue = new DefaultQueue<TreeImpl>();
         TreeImpl<T> currentNode = null;
         T retVal = null;
         if(root!=null) {
@@ -182,7 +182,7 @@ public class TreeProblemSolver<T extends Comparable> {
      * @return  
      */
     private TreeImpl<T> searchElement(TreeImpl<T> root, int nodeVal) {
-        QueueImpl<TreeImpl> nodeQueue = new QueueImpl<TreeImpl>();
+        DefaultQueue<TreeImpl> nodeQueue = new DefaultQueue<TreeImpl>();
         TreeImpl<T> currentNode = null;
         TreeImpl<T> retVal = null;
         if(root!=null) {
@@ -239,7 +239,7 @@ public class TreeProblemSolver<T extends Comparable> {
         T retVal = null;
         TreeImpl<T> currentNode = null;
         if (root!=null) {
-            QueueImpl<TreeImpl> parentQ = new QueueImpl<TreeImpl>();
+            DefaultQueue<TreeImpl> parentQ = new DefaultQueue<TreeImpl>();
             parentQ.add(root);
             //currentNode = root;
             do {

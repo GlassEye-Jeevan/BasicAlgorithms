@@ -18,7 +18,7 @@ package in.jeevankumar.algorithms;
 import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.algorithms.config.Constants;
 import in.jeevankumar.util.LinkedListNode;
-import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.DefaultQueue;
 import in.jeevankumar.util.TreeImpl;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -121,7 +121,7 @@ public class Helper {
      */    
     public static BinaryTree<Integer> setUpBinaryTree(int size, int bound, boolean randomNumbering) {
         Random rand = new Random();
-        QueueImpl<BinaryTree> parentQueue = new QueueImpl<BinaryTree>();
+        DefaultQueue<BinaryTree> parentQueue = new DefaultQueue<BinaryTree>();
         BinaryTree parentWithOneChild = null; 
         BinaryTree head = null;
         BinaryTree current;

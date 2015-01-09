@@ -19,71 +19,107 @@ package in.jeevankumar.util;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class DoublyLinkedList<T> {
-    private T information;
-    private DoublyLinkedList next;
-    private DoublyLinkedList prev;
-    
+public class DoublyLinkedList<T> implements List<T> {
+    private LinkedListNode head;
+    private LinkedListNode tail;
+    private int size;        
     public DoublyLinkedList() {
-        this.next = null;
-    }
-    
-    public DoublyLinkedList(T info) {
-        this.information = info;
-        this.next = null;
-        this.prev = null;
+        
     }
     /**
-     * @return the information
+     * This method returns true if there is at least one item in the list.
+     * 
+     * @return 
      */
-    public T getInformation() {
-        return information;
+    @Override
+    public boolean hasNext() {
+        boolean retVal = true;
+        if(head == null) {
+            retVal = false;
+        }
+        return retVal;
     }
+    /**
+     * This method adds a node at the end of the List. 
+     * 
+     * @param information 
+     */
+    @Override
+    public void add(T information) {
+        LinkedListNode newNode = new LinkedListNode(information);
+        
+        if(head == null) {
+            tail = head = newNode;
+        }
+        tail.setNext(newNode);
+        tail = newNode;
+        size++;
+    }
+    /**
+     * This method adds the new information node at the head of the list. 
+     * 
+     * @param information 
+     */
+    @Override
+    public void addAtHead(T information) {
+        LinkedListNode newNode = new LinkedListNode(information);
+        if(head == null) {
+            tail = head = newNode;
+        } else {
+            newNode.setNext(head);
+            head = newNode;
+        }
+        size++;
+    }
+    /**
+     * This method adds the information node at the the given index.
+     * 
+     * @param information
+     * @param index 
+     */
+    @Override
+    public void add(T information, int index) {
+        if (index == 0) {
+            this.addAtHead(information);
+        } else {
+            size++;
+            LinkedListNode currentNode = head;
+            for(int i = 0; i < index-1; i++) {
+                currentNode = currentNode.getNext();
+            }
+            LinkedListNode newNode = new LinkedListNode(information);
+            LinkedListNode newChild = currentNode.getNext();
+            newNode.setNext(newChild);
 
-    /**
-     * @param information the information to set
-     */
-    public void setInformation(T information) {
-        this.information = information;
-    }
-
-    /**
-     * @return the next
-     */
-    public DoublyLinkedList getNext() {
-        return next;
-    }
-
-    /**
-     * @param next the next to set
-     */
-    public void setNext(DoublyLinkedList next) {
-        this.next = next;
+            currentNode.setNext(newNode);
+        }
     }
     
     @Override
     public String toString() {
-        DoublyLinkedList head = this;
+        LinkedListNode currentNode = head;
         StringBuffer sb = new StringBuffer();
         while (head!=null) {
-            sb.append(head.information)
+            sb.append(currentNode.getInformation().toString())
                     .append(", ");
-            head = head.next;
+            currentNode = currentNode.getNext();
         }
         return sb.toString();
     }
 
     /**
-     * @return the prev
+     * This method returns the size of the List. 
+     * @return the size
      */
-    public DoublyLinkedList getPrev() {
-        return prev;
+    @Override
+    public int getSize() {
+        return size;
     }
 
     /**
-     * @param prev the prev to set
+     * @param size the size to set
      */
-    public void setPrev(DoublyLinkedList prev) {
-        this.prev = prev;
+    public void setSize(int size) {
+        this.size = size;
     }
 }

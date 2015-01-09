@@ -16,7 +16,11 @@
 package in.jeevankumar.util;
 
 /**
- *
+ * Binary Search Tree is a tree with the following properties: 
+ * 1. Each node can have at most two children
+ * 2. The left child has a value that is lower than that of the parent
+ * 3. The right child is greater than that of the parent. 
+ * 
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class BinarySearchTree<T extends Comparable> {
@@ -35,6 +39,8 @@ public class BinarySearchTree<T extends Comparable> {
     }
 
     /**
+     * This method returns a reference to the info object.
+     * 
      * @return the info
      */
     public T getInfo() {
@@ -42,6 +48,8 @@ public class BinarySearchTree<T extends Comparable> {
     }
 
     /**
+     * This method sets the reference of info.
+     * 
      * @param info the info to set
      */
     public void setInfo(T info) {
@@ -49,6 +57,8 @@ public class BinarySearchTree<T extends Comparable> {
     }
 
     /**
+     * This method returns a reference to the left child. 
+     * 
      * @return the left
      */
     public BinarySearchTree<T> getLeft() {
@@ -56,6 +66,8 @@ public class BinarySearchTree<T extends Comparable> {
     }
 
     /**
+     * This method sets the reference of the left child. 
+     * 
      * @param left the left to set
      */
     public void setLeft(BinarySearchTree<T> left) {
@@ -63,6 +75,8 @@ public class BinarySearchTree<T extends Comparable> {
     }
 
     /**
+     * This method returns a reference to the right child.
+     * 
      * @return the right
      */
     public BinarySearchTree<T> getRight() {
@@ -70,11 +84,19 @@ public class BinarySearchTree<T extends Comparable> {
     }
 
     /**
+     * This method sets the reference of the right child. 
+     * 
      * @param right the right to set
      */
     public void setRight(BinarySearchTree<T> right) {
         this.right = right;
     }
+    
+    /**
+     * Adding an element to the Binary Search Tree. 
+     * 
+     * @param element 
+     */
     
     public void add(BinarySearchTree<T> element) {
         if (this.getInfo().compareTo(element) > 0) {

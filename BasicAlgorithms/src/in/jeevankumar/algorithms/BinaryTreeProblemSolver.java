@@ -17,7 +17,7 @@ package in.jeevankumar.algorithms;
 
 import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.algorithms.config.Constants;
-import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.DefaultQueue;
 import in.jeevankumar.util.TreeImpl;
 
 /**
@@ -82,7 +82,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
     }
     
     private void levelOrderTraversal(BinaryTree root) {
-        QueueImpl<BinaryTree> nodeQueue = new QueueImpl<BinaryTree>();
+        DefaultQueue<BinaryTree> nodeQueue = new DefaultQueue<BinaryTree>();
         BinaryTree<T> currentNode = null;
         System.out.println("");
         if(root!=null) {
@@ -111,7 +111,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @return 
      */
     private T findMaxElement(BinaryTree<T> root) {
-        QueueImpl<BinaryTree> nodeQueue = new QueueImpl<BinaryTree>();
+        DefaultQueue<BinaryTree> nodeQueue = new DefaultQueue<BinaryTree>();
         BinaryTree<T> currentNode = null;
         T retVal = null;
         //System.out.println("");
@@ -148,7 +148,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
      * @return  
      */
     private BinaryTree<T> searchElement(BinaryTree<T> root, int nodeVal) {
-        QueueImpl<BinaryTree> nodeQueue = new QueueImpl<BinaryTree>();
+        DefaultQueue<BinaryTree> nodeQueue = new DefaultQueue<BinaryTree>();
         BinaryTree<T> currentNode = null;
         BinaryTree<T> retVal = null;
         //System.out.println("");
@@ -210,7 +210,7 @@ public class BinaryTreeProblemSolver<T extends Comparable> {
         T retVal = null;
         BinaryTree<T> currentNode = null;
         if (root!=null) {
-            QueueImpl<BinaryTree> parentQ = new QueueImpl<BinaryTree>();
+            DefaultQueue<BinaryTree> parentQ = new DefaultQueue<BinaryTree>();
             parentQ.add(root);
             //currentNode = root;
             do {

@@ -22,6 +22,7 @@ package in.jeevankumar.util;
 public class LinkedListNode <T>{
     private T information;
     private LinkedListNode next;
+    private LinkedListNode prev;
     
     public LinkedListNode() {
         this.next = null;
@@ -69,6 +70,20 @@ public class LinkedListNode <T>{
             head = head.next;
         }
         return sb.toString();
+    }
+
+    /**
+     * @return the prev
+     */
+    public LinkedListNode getPrev() {
+        return prev;
+    }
+
+    /**
+     * @param prev the prev to set
+     */
+    public void setPrev(LinkedListNode prev) {
+        this.prev = prev;
     }
     
 }

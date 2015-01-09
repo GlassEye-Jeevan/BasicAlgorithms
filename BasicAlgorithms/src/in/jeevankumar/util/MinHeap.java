@@ -22,7 +22,7 @@ import java.util.Arrays;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class MinHeap<T extends Comparable> {
+public class MinHeap<T extends Comparable> implements Heap<T> {
     
     private ArrayList<T> elements;
     int size;
@@ -31,6 +31,7 @@ public class MinHeap<T extends Comparable> {
         size = 0;
     }
     
+    @Override
     public ArrayList<T> add(T element) {
         //System.out.println("Adding " + element.toString());
         elements.add(element);
@@ -61,6 +62,7 @@ public class MinHeap<T extends Comparable> {
         list.set(index2, temp);
     }
     
+    @Override
     public T removeTop() {
         //System.out.println("removing " + elements.get(0) + " size " + size);
         T retVal = null;
@@ -96,6 +98,7 @@ public class MinHeap<T extends Comparable> {
         }
         return retVal;
     }
+    @Override
     public void printLevelOrderTraversal() {
         
         System.out.println("Level Order " + elements.toString());
@@ -104,6 +107,7 @@ public class MinHeap<T extends Comparable> {
     /**
      * @return the elements
      */
+    @Override
     public ArrayList<T> getElements() {
         return elements;
     }
@@ -115,6 +119,7 @@ public class MinHeap<T extends Comparable> {
         this.elements = elements;
     }
     
+    @Override
     public boolean isEmpty() {
         return elements.isEmpty();
     }

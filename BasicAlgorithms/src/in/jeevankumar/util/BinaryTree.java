@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * This class represents a binary tree that has the following property:
+ * 1. Each parent can have at most two children
+ * 
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class BinaryTree<T extends Comparable> {
@@ -38,24 +40,46 @@ public class BinaryTree<T extends Comparable> {
         this.info = info;
     }
     
-    
+    /**
+     * This method returns a reference to right child. 
+     * 
+     * @return 
+     */
     public BinaryTree<T> getRight() {
         return this.right;
     }
     
+    /**
+     * This method returns a reference to left child. 
+     * 
+     * @return 
+     */
     public BinaryTree<T> getLeft() {
         return this.left;
     }
     
+    /**
+     * This method sets the reference of the right child.
+     * 
+     * @param right 
+     */
     public void setRight(BinaryTree right) {
         this.right = right;
     }
 
+    /**
+     * This method sets the reference of the left child. 
+     * 
+     * @param left 
+     */
     public void setLeft(BinaryTree left) {
         this.left = left;
     }
 
     /**
+     * This method returns the reference to the info object contained in the 
+     * node.
+     * 
      * @return the info
      */
     public T getInfo() {
@@ -63,6 +87,8 @@ public class BinaryTree<T extends Comparable> {
     }
 
     /**
+     * This method sets the reference of info object contained in the 
+     * node. 
      * @param info the info to set
      */
     public void setInfo(T info) {
@@ -70,6 +96,8 @@ public class BinaryTree<T extends Comparable> {
     }
 
     /**
+     * This method gets the reference to the parent of the current node. 
+     * 
      * @return the parent
      */
     public BinaryTree getParent() {
@@ -77,6 +105,8 @@ public class BinaryTree<T extends Comparable> {
     }
 
     /**
+     * This method sets the reference to the parent of the current node.
+     * 
      * @param parent the parent to set
      */
     public void setParent(BinaryTree parent) {

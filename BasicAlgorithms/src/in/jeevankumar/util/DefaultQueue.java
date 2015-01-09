@@ -21,10 +21,10 @@ import java.util.List;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class QueueImpl<T> implements Queue<T> {
+public class DefaultQueue<T> implements Queue<T> {
     private LinkedListNode<T> head;
     private LinkedListNode<T> tail;
-    public QueueImpl() {
+    public DefaultQueue() {
         //myList = new LinkedListNode<T>();
     }
     

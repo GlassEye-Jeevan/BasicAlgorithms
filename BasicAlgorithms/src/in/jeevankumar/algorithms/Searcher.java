@@ -15,7 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
-import in.jeevankumar.util.QueueImpl;
+import in.jeevankumar.util.DefaultQueue;
 import java.util.Arrays;
 
 /**
@@ -90,7 +90,7 @@ public class Searcher {
      * @return 
      */
     private int breadthFirstSearch(int[] tree, int searchElement) {
-        QueueImpl<Integer> myQueue = new QueueImpl<Integer>();
+        DefaultQueue<Integer> myQueue = new DefaultQueue<Integer>();
         int resultIndex = -1;
         for (int i = 0; i < tree.length;) {
             System.out.println(i);
@@ -116,7 +116,7 @@ public class Searcher {
      * @return 
      */
     private int depthFirstSearch(int[] tree, int searchElement) {
-        QueueImpl<Integer> myQueue = new QueueImpl<Integer>();
+        DefaultQueue<Integer> myQueue = new DefaultQueue<Integer>();
         int resultIndex = -1;
         for (int i = 0; i < tree.length;) {
             System.out.println(i);
