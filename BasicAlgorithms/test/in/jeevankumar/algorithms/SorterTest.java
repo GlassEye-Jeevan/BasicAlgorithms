@@ -40,14 +40,14 @@ public class SorterTest extends TestCase {
     public void testMergeSort() {
         Random randome = new Random();
         int limit = randome.nextInt(100);
-        int[] input = new int[limit];
+        Integer[] input = new Integer[limit];
         
         for (int i = 0; i < limit; i++) {
             input[i] = randome.nextInt();
         }
-        Sorter sorter = new Sorter();
+        Sorter<Integer> sorter = new Sorter<Integer>();
         
-        int[] output = sorter.mergeSort(input);
+        Integer[] output = sorter.mergeSort(input);
         
         for (int i = 1; i < limit; i++) {
             assertTrue(output[i] > output[i-1]);
@@ -57,14 +57,14 @@ public class SorterTest extends TestCase {
     public void testBubbleSort() {
         Random randome = new Random();
         int limit = randome.nextInt(100);
-        int[] input = new int[limit];
+        Integer[] input = new Integer[limit];
         
         for (int i = 0; i < limit; i++) {
             input[i] = randome.nextInt();
         }
-        Sorter sorter = new Sorter();
+        Sorter<Integer> sorter = new Sorter<Integer>();
         
-        int[] output = sorter.bubbleSort(input);
+        Integer[] output = sorter.bubbleSort(input);
         
         for (int i = 1; i < limit; i++) {
             assertTrue(output[i] > output[i-1]);
@@ -96,8 +96,8 @@ public class SorterTest extends TestCase {
     public void testInsertionSort() {
         Random rand = new Random();
         int limit = rand.nextInt(Constants.BOUND);
-        int[] input = new int[limit];
-        int[] copy = new int[limit];
+        Integer[] input = new Integer[limit];
+        Integer[] copy = new Integer[limit];
         
         for(int i = 0; i < limit; i++) {
             input[i] = rand.nextInt();
@@ -105,7 +105,7 @@ public class SorterTest extends TestCase {
         }
         
         Arrays.sort(copy);
-        Sorter sorter = new Sorter();
+        Sorter<Integer> sorter = new Sorter<Integer>();
         input = sorter.insertionSort(input);
         for(int i = 0; i < limit; i++) {
             assertEquals(input[i], copy[i]);

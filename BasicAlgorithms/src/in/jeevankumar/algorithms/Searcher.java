@@ -56,8 +56,17 @@ public class Searcher {
     }
     
     private int binarySearchRunner(int[] intArray, int searchElement) {
-        Sorter sorter = new Sorter();
-        int[] sorted = sorter.mergeSort(intArray);
+        Integer[] wrapper = new Integer[intArray.length];
+        int i = 0;
+        for (int element : intArray) {
+            wrapper[i++] = element;
+        }
+        return binarySearch(wrapper, i, i, searchElement);
+        
+    }
+    private int binarySearchRunner(Integer[] intArray, int searchElement) {
+        Sorter<Integer> sorter = new Sorter<Integer>();
+        Integer[] sorted = sorter.mergeSort(intArray);
         int resultIndex = -1;
         
         System.out.println("Searching " + searchElement + " in " + Arrays.toString(sorted));
@@ -67,7 +76,7 @@ public class Searcher {
         return resultIndex;
     }
     
-    private int binarySearch(int[] searchArray, int start, int end, int searchElement) {
+    private int binarySearch(Integer[] searchArray, int start, int end, int searchElement) {
         int mid = (end+start)/2;
         //System.out.println("mid " + mid + " searchTerm " + searchElement);
         int retVal;

@@ -21,59 +21,64 @@ import java.util.Arrays;
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
+ * @param <T>
  */
-public class Sorter {
+public class Sorter<T extends Comparable> {
     
     public static void main(String[] args) {
-        Sorter sorter = new Sorter();
+        Sorter<Integer> sorter = new Sorter<Integer>();
         sorter.run(args);
     }
     
     public void run(String[] args) {
         
         int[] unsorted = Helper.stringToIntArray(args[1]);
+        Integer[] unsortedIntegers = Helper.stringToGenericIntArray(args[1]);
+        
         int maxElement = 0;
         if (args.length > 2) {
             maxElement = Integer.parseInt(args[2]);
         }
-        int[] sorted = null;
+        Integer[] sorted = null;
+        int[] sortedInts = null;
+        
         System.out.println(Arrays.toString(unsorted));
         
         switch(args[0]) {
                 case "BubbleSort":
-                    sorted = this.bubbleSort(unsorted);
+                    sorted = this.bubbleSort(unsortedIntegers);
                     break;
                 case "ImprovedBubbleSort":
-                    sorted = this.improvedBubbleSort(unsorted);
+                    sorted = this.improvedBubbleSort(unsortedIntegers);
                     break;
                 case "MergeSort":
-                    sorted = this.mergeSort(unsorted);
+                    sorted = this.mergeSort(unsortedIntegers);
                     break;
                 case "QuickSort":
-                    sorted = this.quickSort(unsorted, 0, unsorted.length);
+                    sortedInts = this.quickSort(unsorted, 0, unsortedIntegers.length);
                     break;    
                 case "SelectionSort":
-                    sorted = this.selectionSort(unsorted);
+                    sorted = this.selectionSort(unsortedIntegers);
                     break;
                 case "InsertionSort":
-                    sorted = this.insertionSort(unsorted);
+                    sorted = this.insertionSort(unsortedIntegers);
                     break;
                 case "CountingNonRepeatingSort":
-                    sorted = this.countingNonRepeatingSort(unsorted, maxElement);
+                    sortedInts = this.countingNonRepeatingSort(unsorted, maxElement);
                     break;
                 
                 case "CountingSort":
-                    sorted = this.countingSort(unsorted, maxElement);
+                    sortedInts = this.countingSort(unsorted, maxElement);
                     break;
                 case "BucketSort":
-                    sorted = this.bucketSort(unsorted, maxElement);
+                    sortedInts = this.bucketSort(unsorted, maxElement);
                     break;
                 
                 case "HeapSort":
-                    sorted = this.heapSort(unsorted);
+                    sortedInts = this.heapSort(unsorted);
                     break;
                 default:
-                zdefault:
+                
                     System.out.println("Sort algorithm unrecognized: " + args[0]);
             }
          
@@ -82,11 +87,11 @@ public class Sorter {
         
     }
     
-    public int[] bubbleSort(int[] unsorted) {
+    public <T extends Comparable> T[] bubbleSort(T[] unsorted) {
         for (int i = 0 ; i < unsorted.length; i++) {
             for (int j = 1; j < unsorted.length - i; j++) {
-                if (unsorted[j-1] > unsorted[j]) {
-                    int temp = unsorted[j-1];
+                if (unsorted[j-1].compareTo(unsorted[j]) > 0) {
+                    T temp = unsorted[j-1];
                     unsorted[j-1] = unsorted[j];
                     unsorted[j] = temp;
                 }
@@ -94,15 +99,16 @@ public class Sorter {
         }
         return unsorted;
     }
-    public int[] improvedBubbleSort(int[] unsorted) {
+    
+    public <T extends Comparable> T[] improvedBubbleSort(T[] unsorted) {
         boolean swapFlag = true;
         int swapCount = 0;
         for (int i = 0 ; i < unsorted.length && swapFlag; i++) {
             System.out.println(Arrays.toString(unsorted));
             swapFlag = false;
             for (int j = 1; j < unsorted.length - i; j++) {
-                if (unsorted[j-1] > unsorted[j]) {
-                    int temp = unsorted[j-1];
+                if (unsorted[j-1].compareTo(unsorted[j]) > 0) {
+                    T temp = unsorted[j-1];
                     unsorted[j-1] = unsorted[j];
                     unsorted[j] = temp;
                     swapFlag = true;
@@ -122,15 +128,15 @@ public class Sorter {
      * @param unsorted
      * @return 
      */
-    public int[] mergeSort(int[] unsorted) {
-        int[] sorted = null;
+    public <T extends Comparable> T[]  mergeSort(T[] unsorted) {
+        T[] sorted = null;
         if (unsorted.length == 1) {
             sorted = unsorted;
         } else {
             int mid = unsorted.length / 2;
             
-            int[] left = Arrays.copyOfRange(unsorted, 0, mid);
-            int[] right = Arrays.copyOfRange(unsorted, mid, unsorted.length);
+            T[] left = Arrays.copyOfRange(unsorted, 0, mid);
+            T[] right = Arrays.copyOfRange(unsorted, mid, unsorted.length);
             
             mergeSort(left);
             mergeSort(right);
@@ -151,11 +157,11 @@ public class Sorter {
      * @param right
      * @return 
      */
-    private int[] merge(int[] unsorted, int[] left, int[] right) {
+    private <T extends Comparable> T[] merge(T[] unsorted, T[] left, T[] right) {
         
         for (int i = 0, j=0, k=0; k < unsorted.length ;k++) {
             if (i < left.length && j < right.length) {
-                if (left[i] < right[j]) {
+                if (left[i].compareTo(right[j]) < 0) {
                     unsorted[k] = left[i++];
                 } else {
                     unsorted[k] = right[j++];
@@ -204,12 +210,13 @@ public class Sorter {
         return i;
     }
     
-    public int[] selectionSort(int[] unsorted) {
-        int min, temp;
+    public <T extends Comparable> T[] selectionSort(T[] unsorted) {
+        int min;
+        T temp;
         for (int i = 0; i < unsorted.length; i++) {
             min = i;
             for (int j = i + 1; j < unsorted.length; j++ ) {
-                if(unsorted[j] < unsorted[min])
+                if(unsorted[j].compareTo(unsorted[min]) < 0)
                     min = j;
             }
             temp = unsorted[min];
@@ -219,15 +226,15 @@ public class Sorter {
         return unsorted;
     }
     
-    public int[] insertionSort(int[] unsorted) {
-        int var;
+    public <T extends Comparable> T[] insertionSort(T[] unsorted) {
+        T var;
         int j;
             
         for(int i = 1; i < unsorted.length ; i++) {
             //System.out.println(Arrays.toString(unsorted));
             var = unsorted[i];
             j = i;
-            for (; j > 0 && unsorted[j-1] > var; j--) {
+            for (; j > 0 && unsorted[j-1].compareTo(var) > 0; j--) {
                 unsorted[j] = unsorted[j-1];
             }
             unsorted[j] = var;

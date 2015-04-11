@@ -25,12 +25,35 @@ public class Main {
         main.run(args);
     }
     public void run(String[] args) {
+        String NEWLINE = "\n";
         switch(args[0]) {
             
             case "help":
+                // Need to create a good design with registers to ensure
+                //this help text does not need to be updated. 
+                StringBuffer message = new StringBuffer
+                               ("Hi, Thanks for using Basic Algorithms. ")
+                        .append("Would appreciate any feedback you may have.")
+                        .append(NEWLINE)
+                        .append("This program has implementations for some basic ")
+                        .append("algorithms listed below. To use the algorithms ")
+                        .append("just type in the command as per the recommended ")
+                        .append("usage. You can also use this in your software ")
+                        .append("project through the API.")
+                        .append(NEWLINE)
+                        //sorting algorithms
+                        .append("")
+                        
+                        ;
+                
+                System.out.println("");
+                break;
+                
             default:
-                System.out.println("java BasicAlgorithms <Algorithm Name> "
+                System.out.println("Usage: java BasicAlgorithms <Algorithm Name> "
                         + "<input 1> <input 2> ...");
+                System.out.println("Type \"java BasicAlgorithms help\" for help");
+                
                
         }
     }

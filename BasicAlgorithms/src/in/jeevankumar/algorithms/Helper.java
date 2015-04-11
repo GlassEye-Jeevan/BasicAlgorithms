@@ -67,6 +67,21 @@ public class Helper {
         return unsorted;
     }
     
+    /**
+     * This function takes a comma separated integers in a String 
+     * and into a array of integers. 
+     * @param input
+     * @return 
+     */
+    public static Integer[] stringToGenericIntArray(String input ) {
+        //String input = args[0];
+        String inputs[] = input.split(",");
+        Integer[] unsorted = new Integer[inputs.length];
+        for (int i = 0; i < inputs.length; i++) {
+            unsorted[i] = new Integer(Integer.parseInt(inputs[i].trim()));
+        }
+        return unsorted;
+    }
     public static LinkedListNode generateRandomList(int size) {
         LinkedListNode retVal = null;
         LinkedListNode head = null;
