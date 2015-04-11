@@ -118,7 +118,13 @@ public class MiscProblems {
         }
         return myHeap;
     }
-
+    
+    /** Write a program to find conflicts in meetings. 
+     * 
+     * @param start
+     * @param end
+     * @return 
+     */
     public boolean isThereAConflict(int[] start, int[] end) {
         boolean conflict = false;
         int[] hours = new int[24];
@@ -138,6 +144,31 @@ public class MiscProblems {
         return conflict;
     }
     
+    /** Write a program to find no of rooms required for meetings. 
+     * 
+     * @param start
+     * @param end
+     * @return 
+     */
+    public int countMeetingRooms(int[] start, int[] end) {
+        int[] hours = new int[24];
+        int max = -1;
+        for(int i = 0; i < start.length; i++) {
+            for(int j = start[i]; j < end[i]; j++) {
+                hours[j]++;
+                if(hours[j] > max) {
+                    max = hours[j];
+                }
+            }
+        }
+        return max;
+    }
+    
+    /**
+     * Add two strings of binary numbers. Do not covert the string to integers.
+     * @param input
+     * @return 
+     */
     public String booleanAddString(String[] input) {
         StringBuffer retVal = new StringBuffer();
         final int zeroSum = '0'<<1;
@@ -195,39 +226,36 @@ public class MiscProblems {
         retVal = retVal.reverse();
         return retVal.toString();
     }
-    /*public String booleanAdd(String input1, String input2) {
-        StringBuffer sb = new StringBuffer("");
+    //N-queen problem
+    //Server Logs: Each log has two data types (a) integer (b) string
+    
+    //Local minima or maxima
+    
+    //maxDiff in array elemets with second coming after the first
+    int maxDiff(int[] input) {
+        int[][] output = new int[input.length][input.length];
+        int maxSecond = 0;
+        int max = Integer.MIN_VALUE;
         
-        int length1 = input1.length();
-        int length2 = input2.length();
-        boolean carry = false;
-        for(int i = length1 - 1, j = length2 - 1 ; i > -1 || j > -1; i--, j--) {
-            if(i < length1 && j < length2) {
-                if(input1.charAt(i) == 1 && input2.charAt(j) == 1) {
-                    if(!carry)
-                        sb.append("0");
-                      else 
-                        sb.append("1");
-
-                    carry = true;
-                } else if((input1.charAt(i) == 0 && input2.charAt(j) == 1) || (input1.charAt(i) == 1 && input2.charAt(j) == 0)) {
-                    if(!carry)
-                        sb.append("1");
-                      else {
-                        sb.append("0");
-                        carry = true;
+        for (int i = 0; i < input.length; i++) {
+            int diff;
+            if(i==0) {
+                for(int j = i+1; j < input.length; j++) {
+                    diff = input[j] - input[i];
+                    if(diff > max ){
+                        max = diff;
+                        maxSecond = input[j];
                     }
-
                 }
             } else {
-                if (i > -1) {
-                    if(carry) {
-                        
-                    }
+                diff = maxSecond - input[i];
+                if(diff > max ){
+                        max = diff;
                 }
             }
         }
-        
-    }*/
+        return max;
+    }
+    
     
 }
