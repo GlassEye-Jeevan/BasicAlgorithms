@@ -25,10 +25,10 @@ import java.util.List;
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class BinaryTree<T extends Comparable> {
-    private T info;
-    private BinaryTree left;
-    private BinaryTree right;
-    private BinaryTree parent;
+    public T info;
+    public BinaryTree left;
+    public BinaryTree right;
+    public BinaryTree parent;
     
     public BinaryTree(T info, BinaryTree left, BinaryTree right) {
         this.info = info;

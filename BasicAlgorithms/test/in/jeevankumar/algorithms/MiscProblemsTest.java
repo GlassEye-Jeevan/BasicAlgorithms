@@ -15,6 +15,7 @@
  */
 package in.jeevankumar.algorithms;
 
+import java.util.Arrays;
 import junit.framework.TestCase;
 
 /**
@@ -70,10 +71,39 @@ public class MiscProblemsTest extends TestCase {
         input[0] = "1101010";
         input[1] =    "1000";
         assertEquals(mp.booleanAddString(input), "1110010");
+    }
+    
+    public void testInPlaceReverse() {
+        String input= "12345";
+        char[] inputChar = input.toCharArray();
+        
+        String inputReverse = new StringBuffer(input).reverse().toString();
+        char[] inputReverseChar = inputReverse.toCharArray();
+        
+        MiscProblems mp = new MiscProblems();
+        char[] testOut = mp.inPlaceReverseString(inputChar, 0, inputChar.length-1);
+        //System.out.println(Arrays.toString(testOut) + " ~ " + Arrays.toString(inputReverseChar));
+        assertTrue(isSame(testOut, inputReverseChar));
         
         
-        
-        
+    }
+    private boolean isSame(char[] input1, char[] input2) {
+        boolean retVal = true;
+        if(input1.length != input2.length) {
+            retVal = false;
+        } else {
+            for(int i = 0; i < input1.length; i++) {
+                if(input1[i] != input2[i]) {
+                    retVal = false;
+                    break;
+                }
+            }
+        }
+        return retVal;
+    }
+    public void testInsertMInN() {
+        MiscProblems mp = new MiscProblems();
+        //mp.insertMinN(1, 2);
     }
 }
 

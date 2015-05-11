@@ -15,8 +15,16 @@
  */
 package in.jeevankumar.algorithms;
 
+import in.jeevankumar.util.BinaryTree;
+import in.jeevankumar.util.DefaultQueue;
+import in.jeevankumar.util.GraphNode;
+import in.jeevankumar.util.LinkedListNode;
 import in.jeevankumar.util.MinHeap;
+import in.jeevankumar.util.wip.Node;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  *
@@ -256,6 +264,187 @@ public class MiscProblems {
         }
         return max;
     }
+    public char[] inPlaceReverseString(char[] input, int start, int end) {
+        
+        if(start < end) {
+            char temp = input[start];
+            input[start] = input[end];
+            input[end] = temp;
+            return inPlaceReverseString(input, start+1, end-1);
+        } else 
+            return input;
+    }
     
+    public boolean isBinaryTreeBalanced(BinaryTree node) {
+        boolean retVal = false;
+        if(node == null || ( node.left == null && node.right == null)) {
+            retVal = true;
+        } else {
+            
+            int leftHieght = treeHeight(node.left);
+            int rightHieght = treeHeight(node.right);
+            if(Math.abs(leftHieght-rightHieght) > 1) {
+                retVal = false;
+            } else {
+                retVal = isBinaryTreeBalanced(node.left) && isBinaryTreeBalanced(node.right);
+            }
+        }
+        return retVal;
+    }
     
+    public int treeHeight(BinaryTree node) {
+        int retVal;
+        if(node == null) {
+            retVal = 0;
+        } else if( node.left == null && node.right == null) {
+            retVal = 1;
+        } else {
+            int leftHeight = treeHeight(node.left);
+            int rightHeight = treeHeight(node.right);
+            if(leftHeight > rightHeight)
+                retVal = leftHeight + 1;
+            else
+                retVal = rightHeight + 1;
+            //return treeHeight(node.left) + treeHeight(node.right);
+        }
+        return retVal;
+    }
+    
+    public int checkHeight(BinaryTree root) {
+        
+        if(root == null) {
+            return 0;
+        }
+        
+        int leftHeight = checkHeight(root.left);
+        if(leftHeight == -1) {
+            return -1;
+        } 
+        
+        int rightHeight = checkHeight(root.right);
+        if(rightHeight == -1) {
+            return -1;
+        }
+        
+        int diff = leftHeight - rightHeight;
+        if(Math.abs(diff) > 1) {
+            return -1;
+        } else {
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+        
+    }
+    
+    public boolean routeExists(GraphNode start, GraphNode end) {
+        List<GraphNode> nodeQueue = new LinkedList<GraphNode>();
+        nodeQueue.add(start);
+        boolean retVal = false;
+        while(!nodeQueue.isEmpty()) {
+            GraphNode node = nodeQueue.get(0);
+            nodeQueue.remove(node);
+            if(node.equals(end)) {
+                retVal = true;
+                break;
+            } else {
+                LinkedListNode<GraphNode> lgNode = node.getAdjNodes();
+                while(lgNode!=null) {
+                    nodeQueue.add(lgNode.getInformation());
+                    lgNode = lgNode.getNext();
+                }
+            }
+            
+        }
+        return retVal;
+    }
+    public BinaryTree createBinaryTreeOfMinimalHieght(int[] sortedInts) {
+        BinaryTree retVal = null;
+        Queue<BinaryTree> nodeQueue = (Queue<BinaryTree>) new DefaultQueue<BinaryTree>();
+        int counter = 0;
+        for(int i = sortedInts.length / 2 + 1; i > -1; i--) {
+            BinaryTree leftBinTree = new BinaryTree(sortedInts[i]);
+            BinaryTree rightBinTree;// = new BinaryTree(sortedInts[i]);
+            
+            if(retVal == null) {
+                retVal = leftBinTree;
+                nodeQueue.add(retVal);
+                counter++;
+            } else {
+                BinaryTree node = nodeQueue.element();
+                nodeQueue.remove(node);
+                
+                node.setLeft(leftBinTree);
+                counter++;
+                nodeQueue.add(leftBinTree);
+                if(sortedInts.length/2 + counter-1 < sortedInts.length) {
+                    rightBinTree = new BinaryTree(sortedInts[sortedInts.length/2 + counter]);
+
+                    node.setRight(rightBinTree);
+                    counter++;
+                    nodeQueue.add(rightBinTree);
+                }
+            }
+           
+        }
+        return retVal;
+        
+    }
+    
+    public BinaryTree createMinimalBinaryTree(int[] sortedInts, int start, int end) {
+        if(end < start) {
+            return null;
+        }
+        int mid = (start + end)/2;
+        BinaryTree binNode = new BinaryTree(sortedInts[mid]);
+        binNode.left = createMinimalBinaryTree(sortedInts, start, mid-1);
+        binNode.right = createMinimalBinaryTree(sortedInts, mid+1, end);
+        
+        return binNode;
+    }
+    
+    public boolean isBinarySearchTree(BinaryTree root, Integer min, Integer max) {
+        boolean retVal = true;
+        if(root == null) {
+            return true;
+        } 
+        if((min!=null && root.info.compareTo(min) < 0) && 
+                max!=null && root.info.compareTo(max) > 0) {
+            return false;
+        }
+            
+        if(!isBinarySearchTree(root.left, min, (Integer)root.info) ||
+                !isBinarySearchTree(root.left, (Integer)root.info, max)) {
+            return false;
+        }
+        return true;
+    }
+    
+    public int insertMinN(int m, int n, int start, int end) {
+        System.out.println(~0);
+        int allOnes = ~0;
+        int leftMask  = allOnes << (start + 1);
+        int rightMask = (1 << end ) - 1;
+        int totalMask = leftMask | rightMask;
+        
+        int n_cleared = n & totalMask;
+        int m_shifted = m << end;
+        return n_cleared | m_shifted;
+    }
+    
+    public void calculationQuestionOrder() {
+        //Assume that userid, question
+        
+    }
+    
+    public void printPairsThatSumToK(int k, int[] input) {
+        int first, second;
+        for (int i = 0; i < input.length; i++) {
+            first = input[i];
+            for(int j = i + 1; j < input.length; j++) {
+                second = input[j];
+                if(first + second == k) {
+                    System.out.println("( " + first + ", " + second + " )");
+                }
+            }
+        }
+    }
 }

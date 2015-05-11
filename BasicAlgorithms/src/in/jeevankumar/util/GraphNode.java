@@ -44,7 +44,7 @@ public class GraphNode<T> {
     }
     
     public void addEdge(GraphNode adjNode) {
-        LinkedListNode item = new LinkedListNode(adjNode);
+        LinkedListNode<GraphNode> item = new LinkedListNode<GraphNode>(adjNode);
         if(adjNodes == null) {
             adjNodes = item;
         } else {

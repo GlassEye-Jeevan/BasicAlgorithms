@@ -145,17 +145,19 @@ public class GraphProblemSolver {
         return nodeMap;
     }
     
-    private void depthFirstTraversal(GraphNode<Integer> node, boolean[] visited) {
+    public void depthFirstTraversal(GraphNode<Integer> node, boolean[] visited) {
         if(node != null ) {
             if(!visited[node.getInfo().intValue()]) {
                 System.out.print(node.getInfo() + " ");
                 visited[node.getInfo().intValue()] = true;
+                
                 LinkedListNode<GraphNode> adjNodes = node.getAdjNodes();
                 while(adjNodes != null) {
                     //System.out.println("Going after " + adjNodes.getInformation().getInfo());
                     depthFirstTraversal(adjNodes.getInformation(), visited);
                     adjNodes = adjNodes.getNext();
                 }
+                
             }
         }
     }
@@ -361,5 +363,25 @@ public class GraphProblemSolver {
         }
         printDjikstraOutput(graph);
         return null;
+    }
+    
+    
+    public boolean find(GraphNode root, GraphNode node) {
+        if(root == null) {
+            return false;
+        } else if(root.equals(node)) {
+            return true;
+        } else {
+            
+            LinkedListNode child = root.getAdjNodes();
+            boolean retVal = false;
+            do {
+               retVal = retVal && find((GraphNode)child.getInformation(), node);
+                child = child.getNext();
+            } while(child!=null);
+            
+            return retVal;
+        }
+        
     }
 }
