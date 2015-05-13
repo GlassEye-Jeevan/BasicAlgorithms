@@ -18,7 +18,8 @@ package in.jeevankumar.practice;
 import java.util.HashSet;
 
 /**
- *
+ * This class contains basic algorithms related to Linked Lists. 
+ * 
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class LinkedListAlgo {
@@ -41,6 +42,12 @@ public class LinkedListAlgo {
         }
         return head;
     }
+    /**
+     * Deletes the duplicate nodes from linked list. 
+     * 
+     * @param head (Node) - head of the linked list
+     * @return - head of the linked list without duplicates
+     */
     public Node deleteDuplicate(Node head) {
         HashSet<Integer> hSet = new HashSet();
         Node prev = head;
@@ -65,7 +72,12 @@ public class LinkedListAlgo {
     //delete a node from linkedlist
     //you have access to only the node in the linkedlist that neeeds to be 
     //deleted
-    
+    /**
+     * Removes the current node in the linked list. The data in the next node
+     * moved to the current and last node is deleted. 
+     * 
+     * @param n (Node) - current node that needs to be deleted 
+     */
     public void deleteCurrentNode(Node n) {
         while(n != null) {
             if(n.next != null)
@@ -84,10 +96,13 @@ public class LinkedListAlgo {
     //Merge at the end.
     
     
-    // Is there a loop in the linkedList. Return pointer to begining of loop
-    
-    // Write a function that takes in two sorted lists and 
-    // outputs   a sorted list that is their union. 
+    /**
+     * Merges the two linked lists, and returns a union of the two lists. 
+     * 
+     * @param a (Node) - Head of the first linked list
+     * @param b (Node) - Head of the second linked list
+     * @return - A merged list of two linked list. 
+     */
     public Node mergeList(Node a, Node b) {
         Node head;
         if(a.data < b.data) {
@@ -117,6 +132,7 @@ public class LinkedListAlgo {
                 n = n.next;
             } 
         } while(a != null || b != null);
+        head = deleteDuplicate(head);
         return head;
     }
 

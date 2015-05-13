@@ -201,4 +201,18 @@ public class Helper {
         return retVal;
     }
     
+    /**
+     * Creates an int array of given size.
+     * @param size (int) - expected size of output array
+     * @param rangeLimit (int) - the expected range of values 0 (inclusive) and rangeLimit (exclusive)
+     * @return output int array of given size
+     */
+    static int[] createArray(int size, int rangeLimit) {
+        Random rand = new Random();
+        int[] retVal = new int[size];
+        for(int i = 0; i < size; i++) {
+            retVal[i] = rand.nextInt(rangeLimit);
+        }
+        return retVal;
+    }
 }
