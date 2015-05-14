@@ -103,7 +103,7 @@ public class LinkedListAlgo {
      * @param b (Node) - Head of the second linked list
      * @return - A merged list of two linked list. 
      */
-    public Node mergeList(Node a, Node b) {
+    public Node createUnionOfSortedLists(Node a, Node b) {
         Node head;
         if(a.data < b.data) {
             head = a;
@@ -112,27 +112,39 @@ public class LinkedListAlgo {
             head = b;
             b= b.next;
         }
-        Node n = null;
+        Node n = head;
         do {
             if(a != null && b != null)  {
-                if(a.data < b.data) {
-                    head.next = a;
+                if(a.data < b.data ) {
+                    if(a.data != n.data) {
+                        n.next = a;
+                        n = n.next;
+                    }
                     a = a.next;
+                    
                 } else {
-                    head.next = b;
+                    if(b.data != n.data) {
+                        n.next = b;
+                        n = n.next;
+                    }
                     b = b.next;
                 }
             } else {
-                if(a == null)
-                    n = b;
-                else if (b == null) 
-                    n = a;
-                
-                head.next = n;
-                n = n.next;
+                if(a == null) {
+                    if(b.data != n.data) {
+                        n.next = b;
+                        n = n.next;
+                    }
+                    b = b.next;
+                } else if (b == null) {
+                    if(a.data != n.data) {
+                        n.next = a;
+                        n = n.next;
+                    }
+                    a = a.next;
+                }
             } 
         } while(a != null || b != null);
-        head = deleteDuplicate(head);
         return head;
     }
 
