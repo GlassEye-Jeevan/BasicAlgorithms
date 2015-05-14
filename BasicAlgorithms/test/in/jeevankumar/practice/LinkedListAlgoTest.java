@@ -55,6 +55,27 @@ public class LinkedListAlgoTest extends TestCase {
         }
         return head;
     }
+    private Node createListAscending(int limit) {
+        if(limit == 0)
+            return null;
+        
+        int i = 0;
+        Node head = new Node(i++);
+        while(i < limit) {
+            head.appendToTail(i++);
+        }
+        return head;
+    }
+    private Node createListFromArray(int[] input) {
+        if(input == null || input.length == 0)
+            return null;
+        int i = 0;
+        Node head = new Node(input[i++]);
+        while (i < input.length ) {
+            head.appendToTail(input[i++]);
+        }
+        return head;
+    }
     
     public void deleteNodeTest() {
         Node head = createListDescending(10);
@@ -94,5 +115,46 @@ public class LinkedListAlgoTest extends TestCase {
             limit--;
         }
         
+    }
+    
+    public void testCreateUnionOfSortedLists() {
+        
+        int limit = 10;
+        Node a = createListAscending(limit);
+        Node b = createListAscending(limit);
+        LinkedListAlgo lla = new LinkedListAlgo();
+        Node c = lla.createUnionOfSortedLists(a, b);
+        Node n = c;
+        
+        for (int i = 0; i < limit; i++) {
+            assertEquals(n.data, i);
+            n = n.next;
+        }
+        
+        //printList(c);
+        int[] arr = {1,2,2,2,2,4};
+        int[] brr = {0,3,3,3,5};
+        a = createListFromArray(arr);
+        b = createListFromArray(brr);
+        //printList(a);
+        //printList(b);
+        
+        limit = 6;
+        n = lla.createUnionOfSortedLists(a, b);
+        //printList(n);
+        
+        for (int i = 0; i < limit; i++) {
+            assertEquals(n.data, i);
+            n = n.next;
+        }
+        
+    }
+    private void printList(Node n) {
+        
+        while(n != null) {
+            System.out.print(n.data + " -> ");
+            n = n.next;
+        }
+        System.out.println();
     }
 }
