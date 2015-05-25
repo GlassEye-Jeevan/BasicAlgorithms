@@ -70,14 +70,7 @@ public class TreeNodeAlgo {
     public int hieght(TreeNode n) {
         if(n == null) 
             return 0;
-        
-        int leftHieght = hieght(n.left);
-        int rightHieght = hieght(n.right);
-        
-        if(leftHieght > rightHieght)
-            return leftHieght + 1;
-        else 
-            return rightHieght + 1;
+       return Math.max(hieght(n.left), hieght(n.right)) + 1;
        
     }
     
@@ -118,9 +111,7 @@ public class TreeNodeAlgo {
 
             if(node.right != null)
                 q.add(node.right);
-
         }
-
         return false;
     }
     
@@ -129,9 +120,34 @@ public class TreeNodeAlgo {
             return null;
         int mid = (minIndex + maxIndex) / 2 ; 
         TreeNode tNode = new TreeNode(arr[mid]);
-        tNode.left = createMinimalBST(arr, minIndex, mid);
+        tNode.left = createMinimalBST(arr, minIndex, mid-1);
         tNode.right = createMinimalBST(arr, mid + 1, maxIndex);
         
         return tNode;
+    }
+    
+    public boolean isSubTree(TreeNode parent, TreeNode child) {
+        if(child == null) 
+            return true;
+        
+        if (parent == null)
+            return false;
+        
+        if(parent.data == child.data) 
+            return matchTree(parent, child);
+        else 
+            return isSubTree(parent.left, child) || isSubTree(parent.right, child);
+        
+    }
+    
+    private boolean matchTree(TreeNode parent, TreeNode child) {
+        if(parent == null && child == null)
+            return true;
+        
+        if(parent.data == child.data) 
+            return matchTree(parent.left, child.left) 
+                    && matchTree(parent.right, child.right);
+        else 
+            return false;
     }
 }

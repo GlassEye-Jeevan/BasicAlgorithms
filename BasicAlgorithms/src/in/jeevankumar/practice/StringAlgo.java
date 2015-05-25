@@ -52,4 +52,67 @@ public class StringAlgo {
         }
         return retVal;
     }
+    
+    
+    /**
+     * This function returns true if rotString is a rotation of searchString. 
+     * @param searchString
+     * @param rotString
+     * @return 
+     */
+    public boolean isRotation(String searchString, String rotString) {
+        String doubleRotString = rotString + rotString;
+        
+        return doubleRotString.contains(searchString);
+    }
+    
+    /**
+     * This function adds two binary strings. 
+     * @param a (String) - A binary String 
+     * @param b (String) - A binary String
+     * @return - A binary string that is the sum of a and b
+     */
+    public String addBinaryString(String a, String b) {
+        StringBuffer retVal = new StringBuffer(Math.max(a.length(), b.length()) + 1);
+        char zeroSum = '0' + '0';
+        char zeroOneSum = '0' + '1';
+        char oneOneSum = '1' + '1';
+        char carry = '0';
+        for(int i = a.length() - 1, j = b.length() - 1; i > 0 || j > 0; i--,j--) {
+            if( i < 0 )
+                return copyRest(b, j, carry, retVal);
+            else if(j < 0)
+                return copyRest(a, i, carry, retVal);
+            
+            char sum = (char) (a.charAt(i) + b.charAt(j));
+            
+            if(sum == zeroSum) {
+                retVal.append(carry);
+                carry = '0';
+            } else if (sum == zeroOneSum) {
+                if(carry == '0') {
+                    retVal.append('1');
+                    carry = '0';
+                } else {
+                    retVal.append('0');
+                    carry = '1';
+                }
+            } else if(sum == oneOneSum) {
+                if(carry == '0') {
+                    retVal.append('0');
+                    carry = '1';
+                }
+                else {
+                    retVal.append('1');
+                    carry = '1';
+                }
+            }
+            
+        }
+        
+        return null;
+    }
+    public String copyRest(String a, int index, char carry, StringBuffer out) {
+        return null;
+    }
 }

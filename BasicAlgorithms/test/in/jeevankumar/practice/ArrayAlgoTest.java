@@ -59,4 +59,13 @@ public class ArrayAlgoTest extends TestCase {
         }
         return false;
     }
+    
+    public void testRotateMatrix() {
+        int[][] a = {{1,2,3},
+                     {4,5,6},
+                     {7,8,9}};
+        ArrayAlgo aa = new ArrayAlgo();
+        aa.rotateMatrix(a);
+    }
+    
 }

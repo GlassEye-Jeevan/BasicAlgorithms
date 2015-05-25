@@ -167,7 +167,7 @@ public class Helper {
                         .append(LEFT_STRING).append(current.getInfo());
             }
         }
-        System.out.println(output.toString());
+        //System.out.println(output.toString());
         return head;
     }
     /**
@@ -214,5 +214,20 @@ public class Helper {
             retVal[i] = rand.nextInt(rangeLimit);
         }
         return retVal;
+    }
+    
+    /**
+     * Prints a matrix
+     * @param a (int[][]) - Input square matrix
+     */
+    public static void printMatrix(int[][] a) {
+        int m = a.length;
+        int n = a[0].length;
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                System.out.print(a[i][j] + ", ");
+            }
+            System.out.println();
+        }
     }
 }
