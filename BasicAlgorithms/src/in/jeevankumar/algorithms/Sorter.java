@@ -87,17 +87,17 @@ public class Sorter<T extends Comparable> {
         
     }
     
-    public <T extends Comparable> T[] bubbleSort(T[] unsorted) {
-        for (int i = 0 ; i < unsorted.length; i++) {
-            for (int j = 1; j < unsorted.length - i; j++) {
-                if (unsorted[j-1].compareTo(unsorted[j]) > 0) {
-                    T temp = unsorted[j-1];
-                    unsorted[j-1] = unsorted[j];
-                    unsorted[j] = temp;
+    public <T extends Comparable> T[] bubbleSort(T[] a) {
+        for (int i = 0 ; i < a.length; i++) {
+            for (int j = 1; j < a.length - i; j++) {
+                if (a[j-1].compareTo(a[j]) > 0) {
+                    T temp = a[j-1];
+                    a[j-1] = a[j];
+                    a[j] = temp;
                 }
             }
         }
-        return unsorted;
+        return a;
     }
     
     public <T extends Comparable> T[] improvedBubbleSort(T[] unsorted) {
@@ -149,30 +149,30 @@ public class Sorter<T extends Comparable> {
     
     /**
      * This is a utility function for merge sort. It merges left and the right 
-     * array into the 'unsorted' array, it merges the left and right arrays in
-     * ascending manner.
+ array into the 'a' array, it merges the left and right arrays in
+ ascending manner.
      * 
-     * @param unsorted
+     * @param a
      * @param left
      * @param right
      * @return 
      */
-    private <T extends Comparable> T[] merge(T[] unsorted, T[] left, T[] right) {
+    private <T extends Comparable> T[] merge(T[] a, T[] left, T[] right) {
         
-        for (int i = 0, j=0, k=0; k < unsorted.length ;k++) {
+        for (int i = 0, j=0, k=0; k < a.length ;k++) {
             if (i < left.length && j < right.length) {
                 if (left[i].compareTo(right[j]) < 0) {
-                    unsorted[k] = left[i++];
+                    a[k] = left[i++];
                 } else {
-                    unsorted[k] = right[j++];
+                    a[k] = right[j++];
                 }
             } else if (i < left.length) {
-                unsorted[k] = left[i++];
+                a[k] = left[i++];
             } else if (j < right.length) {
-                unsorted[k] = right[j++];
+                a[k] = right[j++];
             }
         }
-        return unsorted;
+        return a;
     }
     public int[] quickSort(int[] unsorted, int left, int right) {
         
