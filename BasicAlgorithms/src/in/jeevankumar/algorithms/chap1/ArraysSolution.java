@@ -21,9 +21,9 @@ import java.util.HashMap;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-class Solution {
+class ArraysSolution {
 	public static void main(String[] args) {
-		Solution sol = new Solution();
+		ArraysSolution sol = new ArraysSolution();
 		sol.isUniqueChar(args[0]);
 		
 	}

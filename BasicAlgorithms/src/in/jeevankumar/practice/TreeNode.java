@@ -20,9 +20,9 @@ package in.jeevankumar.practice;
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
 public class TreeNode {
-    TreeNode left = null;
-    TreeNode right = null;
-    int data;
+    public TreeNode left = null;
+    public TreeNode right = null;
+    public int data;
     boolean visited;
     public TreeNode(int d) {
         this.data = d;

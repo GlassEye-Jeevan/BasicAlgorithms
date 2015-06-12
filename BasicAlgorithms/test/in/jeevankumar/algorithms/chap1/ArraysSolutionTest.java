@@ -21,9 +21,9 @@ import junit.framework.TestCase;
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class SolutionTest extends TestCase {
+public class ArraysSolutionTest extends TestCase {
     public void testIsUniqueChar() {
-        Solution sol = new Solution();
+        ArraysSolution sol = new ArraysSolution();
         String input = "";
         assertTrue(sol.isUniqueChar(input));
         
@@ -44,7 +44,7 @@ public class SolutionTest extends TestCase {
         
     }
     public void testReverseString() {
-        Solution sol = new Solution();
+        ArraysSolution sol = new ArraysSolution();
         
         String input = "a";
         assertEquals(input, sol.reverseString(input));
@@ -60,7 +60,7 @@ public class SolutionTest extends TestCase {
     }
     
     public void testPermutations() {
-        Solution sol = new Solution();
+        ArraysSolution sol = new ArraysSolution();
         String input1 = null;
         String input2 = null;
         

@@ -13,27 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package in.jeevankumar.practice;
+package in.jeevankumar.algorithms.chap1;
+
+import in.jeevankumar.practice.TreeNode;
+import in.jeevankumar.util.wip.Node;
 
 /**
  *
  * @author Jeevan Kumar <mail@jeevankumar.in>
  */
-public class Node {
-    public Node next = null;
-    public int data;
-    
-    public Node(int d) {
-        this.data = d;
+public class TreeSolution {
+    public TreeNode invertTree(TreeNode n) {
+        if(n==null)
+            return n;
+        
+        TreeNode temp = n.left;
+        
+        invertTree(left);
+        invertTree(right);
+        
+        n.left = n.right;
+        n.right = temp;
+        
+        return n;
     }
-    
-    public void appendToTail(int d) {
-        Node end = this;
-        while(end.next != null) {
-            end = end.next;
-        }
-        Node temp = new Node(d);
-        end.next = temp;
+    public int height(TreeNode n) {
+        if(n==null)
+            return 0;
+        return Math.max(height(n.left), height(n.right)) + 1;
     }
-    
 }

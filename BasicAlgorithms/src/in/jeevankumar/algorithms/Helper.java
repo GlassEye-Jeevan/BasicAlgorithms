@@ -17,12 +17,11 @@ package in.jeevankumar.algorithms;
 
 import in.jeevankumar.util.BinaryTree;
 import in.jeevankumar.algorithms.config.Constants;
+import in.jeevankumar.practice.TreeNode;
 import in.jeevankumar.util.LinkedListNode;
 import in.jeevankumar.util.DefaultQueue;
-import in.jeevankumar.util.TreeImpl;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FilterReader;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -229,5 +228,32 @@ public class Helper {
             }
             System.out.println();
         }
+    }
+    
+    /**
+     * Print bits
+     * @param i (int) - Input integer
+     */
+    public static void printBits(int i) {
+        StringBuffer sb = new StringBuffer();
+        while(i >0) {
+            sb.append(i & 1);
+            System.out.println(0&1);
+            i = i /10;
+        }
+        System.out.println(sb.reverse().toString());
+    }
+    
+    /**
+     * Print tree
+     * @param n (TreeNode) - root of the tree
+     */
+    public static void printTree(String prefix, TreeNode n) {
+        if(n==null)
+            return;
+    
+        System.out.println(prefix + "" + n.data);
+        printTree(prefix + "|-- ", n.left);
+        printTree(prefix + "└-- ", n.right);
     }
 }
