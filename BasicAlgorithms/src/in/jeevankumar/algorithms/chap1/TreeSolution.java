@@ -26,12 +26,10 @@ public class TreeSolution {
     public TreeNode invertTree(TreeNode n) {
         if(n==null)
             return n;
+        invertTree(n.left);
+        invertTree(n.right);
         
         TreeNode temp = n.left;
-        
-        invertTree(left);
-        invertTree(right);
-        
         n.left = n.right;
         n.right = temp;
         
